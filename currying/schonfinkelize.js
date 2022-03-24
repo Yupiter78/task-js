@@ -35,16 +35,16 @@ console.log(schonfinkelize(_sum3, 6, 6)(7)); //19
 console.log(schonfinkelize(_sum3, 1, 3)(2)); //6
 
 
-const mul = (x) => {
-    return (y) => {
-        return (z) => {
-            return x * y * z;
-        };
-    };
-};
-
-
-const _sum4 = (p, q, r, s) => p + q + r + s;
+// const mul = (x) => {
+//     return (y) => {
+//         return (z) => {
+//             return x * y * z;
+//         };
+//     };
+// };
+//
+//
+// const _sum4 = (p, q, r, s) => p + q + r + s;
 
 function curry(fn) {
     console.log("arguments:", arguments);
@@ -106,3 +106,33 @@ console.log(+sum(0)(1)(2)(3)(4)(5) === 15)
 
 console.log("{}:", {});
 alert({});
+
+function curry2(func) {
+    console.log("func:", func)
+
+    return function curried(...args) {
+        console.log("args:", args);
+        console.log({args});
+        console.log("args.length:", args.length);
+        console.log("func.length:", func.length);
+        if (args.length >= func.length) {
+            return func.apply(this, args);
+        } else {
+            return function(...args2) {
+                return curried.apply(this, args.concat(args2));
+            }
+        }
+    };
+
+}
+
+
+function added(a, b, c) {
+    return a + b + c;
+}
+
+let curriedSum = curry2(added);
+
+alert( curriedSum(1, 2, 3) ); // 6, всё ещё можно вызывать нормально
+alert( curriedSum(1)(2,3) ); // 6, каррирование первого аргумента
+alert( curriedSum(1)(2)(3) ); // 6, каррирование всех аргументов

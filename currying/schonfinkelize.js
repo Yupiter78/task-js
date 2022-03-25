@@ -93,7 +93,7 @@ function sum(a) {
     return f;
 }
 
-console.log("sum:",sum(1)(2).toString()); // 3
+console.log("sum:", sum(1)(2).toString()); // 3
 alert(sum(5)(-1)(2)); // 6
 console.log(sum(6)(-1)(-2)(-3)); // 0
 console.log(sum(0)(1)(2)(3)(4)(5)); // 15
@@ -118,7 +118,7 @@ function curry2(func) {
         if (args.length >= func.length) {
             return func.apply(this, args);
         } else {
-            return function(...args2) {
+            return function (...args2) {
                 return curried.apply(this, args.concat(args2));
             }
         }
@@ -133,6 +133,41 @@ function added(a, b, c) {
 
 let curriedSum = curry2(added);
 
-alert( curriedSum(1, 2, 3) ); // 6, всё ещё можно вызывать нормально
-alert( curriedSum(1)(2,3) ); // 6, каррирование первого аргумента
-alert( curriedSum(1)(2)(3) ); // 6, каррирование всех аргументов
+console.log(curriedSum(1, 2, 3)); // 6, всё ещё можно вызывать нормально
+console.log(curriedSum(1)(2, 3)); // 6, каррирование первого аргумента
+console.log(curriedSum(1)(2)(3)); // 6, каррирование всех аргументов
+
+//f(x, y, z) => f(x)(y)(z); Soer
+
+// const currySoer = (f) => (fx(x)) => (fy(y)) => (fz(z)) => f(x, y, z);
+// function currySoer2(f) {
+//     return function (x) {
+//         return function (y) {
+//             return function (z) {
+//                 return f(x, y, z);
+//             }
+//         }
+//     }
+// }
+
+
+Function.prototype.currySoer3 = function (...args) {
+    const currying = (func, ...args) => func.length <= args.length ?
+        func(...args) : (...others) => currying(func, ...args, ...others);
+    return currying(this, ...args);
+}
+
+function currySoer3(_f) {
+    return (x) => (y) => (z) => _f(x, y, z);
+}
+
+function f(x, y, z) {
+    return x + y + z;
+}
+
+console.log("currySoer3(f)(1)(2)(3):", currySoer3(f)(1)(2)(3)); // curry
+console.log("f.currySoer3(1)(2)(3):", f.currySoer3(1)(2)(3)); //part
+console.log("currySoer3(f)(1)(2)(3):", currySoer3(f)(1)(2, 3));
+console.log("f.currySoer3(1)(2)(3):", f.currySoer3(1)(2, 3));
+console.log("currySoer3(f)(1)(2)(3):", currySoer3(f)(1)(2, 3)(3));
+console.log("f.currySoer3(1)(2)(3):", f.currySoer3(1)(2, 3)(3));

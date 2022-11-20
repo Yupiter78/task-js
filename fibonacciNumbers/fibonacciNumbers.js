@@ -1,0 +1,65 @@
+
+
+const fibonacciNumbers = (num) => {
+    let x = 0,
+    y = 1,
+    sum = 0,
+    n = 1;
+
+    if (num === 0) n = 0;
+
+    while (sum < num) {
+        sum = x + y;
+        console.log("sum:", sum);
+        console.log("x:", x);
+        console.log("y:", y);
+
+        n++;
+        x = y;
+        y = sum;
+    }
+    if (sum === num) {
+        return n;
+    }
+    return -1;
+}
+
+// console.log(fibonacciNumbers(8));
+// console.log(fibonacciNumbers( 1));
+// console.log(fibonacciNumbers(10));
+// console.log(fibonacciNumbers(144));
+// console.log(fibonacciNumbers(1597));
+// console.log(fibonacciNumbers(6557470319842));
+console.log(fibonacciNumbers(5527939700884757));
+
+const cacheFibNums = {};
+function getFibonacciNumbers(num) {
+    if (num <= 1) {
+        return num;
+    } else {
+        let firstFibNum, secondFibNum;
+
+        if (cacheFibNums[num - 1]) {
+            firstFibNum = cacheFibNums[num - 1];
+        } else {
+            firstFibNum = getFibonacciNumbers(num - 1);
+            cacheFibNums[num - 1] = firstFibNum;
+        }
+
+        if (cacheFibNums[num - 2]) {
+            secondFibNum = cacheFibNums[num - 2];
+        } else {
+            secondFibNum = getFibonacciNumbers(num - 2);
+            cacheFibNums[num - 2] = secondFibNum;
+        }
+
+        return firstFibNum + secondFibNum;
+    }
+}
+
+console.log(getFibonacciNumbers(77));
+
+console.log(Object.values(cacheFibNums));
+
+
+

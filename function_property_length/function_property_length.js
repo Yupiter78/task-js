@@ -17,8 +17,11 @@
 function ask(question, ...handlers) {
     let isYes = confirm(question);
 
+    console.log("handlers:", handlers);
+
     for(let handler of handlers) {
         if (handler.length === 0) {
+            console.log("HANDLER: ", handler);
             if (isYes) handler();
         } else {
             handler(isYes);

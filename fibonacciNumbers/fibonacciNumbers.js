@@ -88,6 +88,17 @@ function getFibonacciNumberNoCache(num) {
 
 // console.log("getFibonacciNumberNoCache: ", getFibonacciNumberNoCache(30));
 
+function hash() {
+    return  [].join.call(arguments);
+}
+
+console.log(hash(1, 2));
+
+function sum() {
+    return  [].reduce.call(arguments, (sum, current) => sum + current);
+}
+
+console.log(sum(1, 2, 3, 4, 5));
 
 function cachingDecorator(func) {
     let cache = new Map();

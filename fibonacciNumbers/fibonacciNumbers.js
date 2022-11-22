@@ -79,4 +79,16 @@ console.log(getFibonacciNumbers_2(20));
 console.log(Object.values(cacheFibNums_2));
 
 
+function bench(f) {
+    let numF = 77
+
+    let start = Date.now();
+    for (let i = 0; i < 10000000; i++) f(numF);
+    return Date.now() - start;
+}
+
+console.log( 'Время getFibonacciNumbers: ' + bench(getFibonacciNumbers) + 'мс' );
+console.log( 'Время getFibonacciNumbers_2: ' + bench(getFibonacciNumbers_2) + 'мс' );
+
+
 

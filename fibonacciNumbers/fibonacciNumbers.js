@@ -57,7 +57,7 @@ function getFibonacciNumbers(num) {
     }
 }
 
-console.log(getFibonacciNumbers(20));
+// console.log(getFibonacciNumbers(20));
 
 console.log(Object.values(cacheFibNums));
 
@@ -74,13 +74,23 @@ function getFibonacciNumbers_2(num) {
     }
 }
 
-console.log(getFibonacciNumbers_2(20));
+// console.log(getFibonacciNumbers_2(20));
 
 console.log(Object.values(cacheFibNums_2));
 
+function getFibonacciNumberNoCache(num) {
+    if (num <= 1) {
+        return num;
+    } else {
+        return getFibonacciNumberNoCache(num - 1) + getFibonacciNumberNoCache(num - 2);
+    }
+}
+
+// console.log("getFibonacciNumberNoCache: ", getFibonacciNumberNoCache(30));
+
 
 function bench(f) {
-    let numF = 77
+    let numF = 9
 
     let start = Date.now();
     for (let i = 0; i < 10000000; i++) f(numF);
@@ -89,6 +99,7 @@ function bench(f) {
 
 console.log( 'Время getFibonacciNumbers: ' + bench(getFibonacciNumbers) + 'мс' );
 console.log( 'Время getFibonacciNumbers_2: ' + bench(getFibonacciNumbers_2) + 'мс' );
+console.log( 'Время getFibonacciNumberNoCache: ' + bench(getFibonacciNumberNoCache) + 'мс' );
 
 
 

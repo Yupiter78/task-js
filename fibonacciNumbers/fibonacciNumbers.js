@@ -95,7 +95,7 @@ function hash() {
 console.log(hash(1, 2));
 
 function sum() {
-    return  [].reduce.call(arguments, (sum, current) => sum + current);
+    return  Array.prototype.reduce.call(arguments, (sum, current) => sum + current, 10);
 }
 
 console.log(sum(1, 2, 3, 4, 5));

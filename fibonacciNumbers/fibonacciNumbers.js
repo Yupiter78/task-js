@@ -24,8 +24,8 @@ const fibonacciNumbers = (num) => {
     return -1;
 }
 
-console.log(fibonacciNumbers(0));
-console.log(fibonacciNumbers(1));
+// console.log(fibonacciNumbers(0));
+// console.log(fibonacciNumbers(1));
 // console.log(fibonacciNumbers(10));
 // console.log(fibonacciNumbers(144));
 // console.log(fibonacciNumbers(1597));
@@ -59,7 +59,7 @@ function getFibonacciNumbers(num) {
 
 // console.log(getFibonacciNumbers(20));
 
-console.log(Object.values(cacheFibNums));
+// console.log(Object.values(cacheFibNums));
 
 const cacheFibNums_2 = {};
 
@@ -76,7 +76,7 @@ function getFibonacciNumbers_2(num) {
 
 // console.log(getFibonacciNumbers_2(20));
 
-console.log(Object.values(cacheFibNums_2));
+// console.log(Object.values(cacheFibNums_2));
 
 function getFibonacciNumberNoCache(num) {
     if (num <= 1) {
@@ -89,6 +89,24 @@ function getFibonacciNumberNoCache(num) {
 // console.log("getFibonacciNumberNoCache: ", getFibonacciNumberNoCache(30));
 
 
+function cachingDecorator(func) {
+    let cache = new Map();
+
+    return function(x) {
+        if (cache.has(x)) { // если кеш содержит такой x,
+            return cache.get(x); // читаем из него результат
+        }
+
+        let result = func(x); // иначе, вызывает функцию с x
+
+        cache.set(x, result); // и кешируем (запоминаем) результат вычислений
+        return result;
+    }
+}
+
+const getCacheFibNum = cachingDecorator(getFibonacciNumberNoCache);
+// console.log("getCacheFibNum: ", getCacheFibNum);
+
 function bench(f) {
     let numF = 9
 
@@ -97,9 +115,12 @@ function bench(f) {
     return Date.now() - start;
 }
 
+
+console.log( 'Время getCacheFibNum: ' + bench(getCacheFibNum) + 'мс' );
 console.log( 'Время getFibonacciNumbers: ' + bench(getFibonacciNumbers) + 'мс' );
 console.log( 'Время getFibonacciNumbers_2: ' + bench(getFibonacciNumbers_2) + 'мс' );
-console.log( 'Время getFibonacciNumberNoCache: ' + bench(getFibonacciNumberNoCache) + 'мс' );
+// console.log( 'Время getFibonacciNumberNoCache: ' + bench(getFibonacciNumberNoCache) + 'мс' );
+
 
 
 

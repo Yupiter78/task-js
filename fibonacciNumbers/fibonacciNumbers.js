@@ -86,7 +86,7 @@ function getFibonacciNumberNoCache(num) {
     }
 }
 
-// console.log("getFibonacciNumberNoCache: ", getFibonacciNumberNoCache(30));
+console.log("getFibonacciNumberNoCache: ", getFibonacciNumberNoCache(7));
 
 function hash() {
     return  [].join.call(arguments);
@@ -94,26 +94,64 @@ function hash() {
 
 console.log(hash(1, 2));
 
-function sum() {
-    return  Array.prototype.reduce.call(arguments, (sum, current) => sum + current, 10);
+
+
+const worker = {
+    getNoCacheFibNum(num) {
+        console.log("num: ", num);
+        if (num <= 1) {
+            return num;
+        } else {
+            return this.getNoCacheFibNum(num - 1) + this.getNoCacheFibNum(num - 2);
+        }
+    },
+
+    getSum() {
+        console.log("arguments_getSum: ", arguments);
+        console.log("typeof arguments[0]: ", typeof arguments[0]);
+        arguments = typeof arguments[0] === "object" ? arguments[0] : arguments;
+        return  Array.prototype.reduce.call(arguments, (sum, current) => sum + current, 0);
+    }
 }
 
-console.log(sum(1, 2, 3, 4, 5));
+console.log("worker.getSum(2, 5): ", worker.getSum(3, 5));
 
-function cachingDecorator(func) {
+
+// function cachingDecorator(func) {
+//     let cache = new Map();
+//
+//     return function(x) {
+//         if (cache.has(x)) { // если кеш содержит такой x,
+//             return cache.get(x); // читаем из него результат
+//         }
+//
+//         let result = func(x); // иначе, вызывает функцию с x
+//
+//         cache.set(x, result); // и кешируем (запоминаем) результат вычислений
+//         return result;
+//     }
+// }
+
+function cachingDecorator(func, sum) {
     let cache = new Map();
 
-    return function(x) {
-        if (cache.has(x)) { // если кеш содержит такой x,
-            return cache.get(x); // читаем из него результат
+    return function() {
+        console.log("arguments: ", arguments);
+        let key = arguments.length === 1 ? arguments[0] : sum(arguments);
+        console.log("key: ", key);
+        if (cache.has(key)) { // если кеш содержит такой x,
+            return cache.get(key); // читаем из него результат
         }
 
-        let result = func(x); // иначе, вызывает функцию с x
+        let result = func.call(this, key); // иначе, вызывает функцию с x
 
-        cache.set(x, result); // и кешируем (запоминаем) результат вычислений
+        cache.set(key, result); // и кешируем (запоминаем) результат вычислений
         return result;
     }
 }
+
+worker.getNoCacheFibNum = cachingDecorator(worker.getNoCacheFibNum, worker.getSum);
+console.log(worker.getNoCacheFibNum(2, 5));
 
 const getCacheFibNum = cachingDecorator(getFibonacciNumberNoCache);
 // console.log("getCacheFibNum: ", getCacheFibNum);
@@ -127,9 +165,9 @@ function bench(f) {
 }
 
 
-console.log( 'Время getCacheFibNum: ' + bench(getCacheFibNum) + 'мс' );
-console.log( 'Время getFibonacciNumbers: ' + bench(getFibonacciNumbers) + 'мс' );
-console.log( 'Время getFibonacciNumbers_2: ' + bench(getFibonacciNumbers_2) + 'мс' );
+// console.log( 'Время getCacheFibNum: ' + bench(getCacheFibNum) + 'мс' );
+// console.log( 'Время getFibonacciNumbers: ' + bench(getFibonacciNumbers) + 'мс' );
+// console.log( 'Время getFibonacciNumbers_2: ' + bench(getFibonacciNumbers_2) + 'мс' );
 // console.log( 'Время getFibonacciNumberNoCache: ' + bench(getFibonacciNumberNoCache) + 'мс' );
 
 

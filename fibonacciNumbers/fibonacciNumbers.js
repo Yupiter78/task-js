@@ -102,6 +102,7 @@ const worker = {
         if (num <= 1) {
             return num;
         } else {
+            console.log("this.getNoCacheFibNum: ", this.getNoCacheFibNum);
             return this.getNoCacheFibNum(num - 1) + this.getNoCacheFibNum(num - 2);
         }
     },
@@ -151,16 +152,19 @@ function cachingDecorator(func, sum) {
 }
 
 worker.getNoCacheFibNum = cachingDecorator(worker.getNoCacheFibNum, worker.getSum);
-console.log(worker.getNoCacheFibNum(2, 5));
+// console.log(worker.getNoCacheFibNum(2, 5));
 
 const getCacheFibNum = cachingDecorator(getFibonacciNumberNoCache);
 // console.log("getCacheFibNum: ", getCacheFibNum);
 
 function bench(f) {
-    let numF = 9
+    let numF = 7;
 
     let start = Date.now();
-    for (let i = 0; i < 10000000; i++) f(numF);
+    for (let i = 0; i < 100; i++) {
+        console.log("f: ", f);
+        f(numF)
+    };
     return Date.now() - start;
 }
 
@@ -169,6 +173,7 @@ function bench(f) {
 // console.log( 'Время getFibonacciNumbers: ' + bench(getFibonacciNumbers) + 'мс' );
 // console.log( 'Время getFibonacciNumbers_2: ' + bench(getFibonacciNumbers_2) + 'мс' );
 // console.log( 'Время getFibonacciNumberNoCache: ' + bench(getFibonacciNumberNoCache) + 'мс' );
+console.log( 'Время worker.getNoCacheFibNum: ' + bench(worker.getNoCacheFibNum) + 'мс' );
 
 
 

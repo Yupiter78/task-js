@@ -19,3 +19,16 @@ user = {
     sayHi() {console.log('Another user in setTimeout!');
     }
 } // выводит другого пользователя в setTimeout
+
+//let boundFunc = func.bind(context);
+
+let user_2 = {
+    firstName: "Vasya"
+}
+
+function func() {
+    console.log(`Hello, ${this.firstName}!`);
+}
+
+const funcUser = func.bind(user_2); // func.bind(user_2) – это «связанный вариант» func, с фиксированным this=user_2
+funcUser();

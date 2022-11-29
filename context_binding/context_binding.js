@@ -32,3 +32,11 @@ function func() {
 
 const funcUser = func.bind(user_2); // func.bind(user_2) – это «связанный вариант» func, с фиксированным this=user_2
 funcUser();
+
+function func_2(phrase) {
+    console.log(`${phrase}, ${this.firstName}!`);
+}
+
+// привязка this к user_2
+const func_2User = func_2.bind(user_2);
+func_2User("HELLO"); // HELLO, Vasya! (аргумент "HELLO" передан, при этом this=user_2)

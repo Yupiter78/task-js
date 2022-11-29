@@ -13,3 +13,9 @@ console.log(globalThis);
 setTimeout(function() {user.sayHi()}, 1000); //Hello, Vasya!
 
 setTimeout(() => user.sayHi(), 1000); //Hello, Vasya!
+
+// ...в течении 1 секунды
+user = {
+    sayHi() {console.log('Another user in setTimeout!');
+    }
+} // выводит другого пользователя в setTimeout

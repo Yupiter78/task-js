@@ -42,19 +42,28 @@ const func_2User = func_2.bind(user_2);
 func_2User("HELLO"); // HELLO, Vasya! (аргумент "HELLO" передан, при этом this=user_2)
 
 const user_3 = {
-    firstName: "Petya",
-    secondName: "Ivanov",
+    _firstName: "Petya",
+    _secondName: "Ivanov",
     get fullName() {
-        return `${this.firstName} ${this.secondName}`;
+        return `${this._firstName} ${this._secondName}`;
     },
     set fullName(value) {
-        [this.firstName, this.secondName] = value.split(" ");
+        [this._firstName, this._secondName] = value.split(" ");
     },
     sayHi() {
-        console.log(`Hello, `)
+        console.log(`HellO, ${this.fullName}`);
     }
 }
 
 console.log(user_3.fullName);
+user_3.sayHi(); // HellO, Petya Ivanov
+setTimeout(user_3.sayHi, 1000); // HellO, undefined
+
+user_3.sayHi.call(user_3); // HellO, Petya Ivanov
+
+const user_3Bound = user_3.sayHi.bind(user_3);
+user_3Bound(); // HellO, Petya Ivanov
+setTimeout(user_3Bound, 1000); // HellO, New Name
+
 user_3.fullName = "New Name";
-console.log(user_3.fullName);
+console.log(user_3.fullName); // New Name

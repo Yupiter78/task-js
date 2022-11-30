@@ -67,3 +67,21 @@ setTimeout(user_3Bound, 1000); // HellO, New Name
 
 user_3.fullName = "New Name";
 console.log(user_3.fullName); // New Name
+
+
+const user_4 = {
+    _firstName: "Petya",
+    _secondName: "Ivanov",
+    get fullName() {
+        return `${this._firstName} ${this._secondName}`;
+    },
+    set fullName(value) {
+        [this._firstName, this._secondName] = value.split(" ");
+    },
+    sayHi(phrase) {
+        console.log(`${phrase}, ${this.fullName}`);
+    }
+}
+
+const user_4Phrase = user_4.sayHi.bind(user_4);
+user_4Phrase("Bay");

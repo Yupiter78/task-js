@@ -40,3 +40,21 @@ function func_2(phrase) {
 // привязка this к user_2
 const func_2User = func_2.bind(user_2);
 func_2User("HELLO"); // HELLO, Vasya! (аргумент "HELLO" передан, при этом this=user_2)
+
+const user_3 = {
+    firstName: "Petya",
+    secondName: "Ivanov",
+    get fullName() {
+        return `${this.firstName} ${this.secondName}`;
+    },
+    set fullName(value) {
+        [this.firstName, this.secondName] = value.split(" ");
+    },
+    sayHi() {
+        console.log(`Hello, `)
+    }
+}
+
+console.log(user_3.fullName);
+user_3.fullName = "New Name";
+console.log(user_3.fullName);

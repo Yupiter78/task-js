@@ -85,3 +85,14 @@ const user_4 = {
 
 const user_4Phrase = user_4.sayHi.bind(user_4);
 user_4Phrase("Bay");
+
+function mul(a, b) {
+    return a * b;
+}
+
+const double = mul.bind(null, 2); //  в данном случае на самом деле здесь мы не используем this
+// но для bind это обязательный параметр, так что мы должны передать туда что-нибудь вроде null
+console.log(double(5)); // = mul(2, 5)
+
+const triple = mul.bind(null, 3);
+console.log(triple(5)); // = mul(3, 5)

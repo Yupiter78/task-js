@@ -96,3 +96,20 @@ console.log(double(5)); // = mul(2, 5)
 
 const triple = mul.bind(null, 3);
 console.log(triple(5)); // = mul(3, 5)
+
+function partial(func, ...argsBound) {
+    return function (...args) {
+        return func.call(this, ...argsBound, ...args);
+    }
+}
+
+const nextUser = {
+    name: "John",
+    say(time, phrase) {
+        return `[${time}] ${this.name}: ${phrase}`;
+    }
+}
+
+nextUser.sayNow = partial(nextUser.say, new Date().getHours() + ":" + new Date().getMinutes());
+
+console.log(nextUser.sayNow("HELLO"));

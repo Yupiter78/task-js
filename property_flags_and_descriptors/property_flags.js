@@ -28,3 +28,14 @@ Object.defineProperty(user_2, "name", {
 })
 
 console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user_2, "name"), null, 2));
+
+
+const user_3 = {
+    name: "Vasya"
+}
+Object.defineProperty(user_3, "name", {
+    writable: false
+})
+
+user_3.name = "Kolya";
+console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user_3, "name"), null, 2));

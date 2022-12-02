@@ -39,3 +39,13 @@ Object.defineProperty(user_3, "name", {
 
 user_3.name = "Kolya";
 console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user_3, "name"), null, 2));
+
+const user_4 = {};
+Object.defineProperty(user_4, "name", {
+    value: "Georg",
+    enumerable: true,
+    configurable: true,
+});
+console.log("user_4:", user_4);
+console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user_4, "name"), null, 2));
+

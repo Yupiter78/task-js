@@ -49,3 +49,23 @@ Object.defineProperty(user_4, "name", {
 console.log("user_4:", user_4);
 console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user_4, "name"), null, 2));
 
+const user_5 = {
+    name: "Vova",
+    toString() {
+        return this.name;
+    }
+}
+
+for (let prop in user_5) {
+    console.log(prop);
+}
+
+Object.defineProperty(user_5, "toString", {
+  enumerable: false
+})
+
+for (let prop in user_5) {
+    console.log(prop);
+}
+
+console.log(Object.keys(user_5));

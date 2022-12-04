@@ -78,3 +78,31 @@ console.log(JSON.stringify(descriptorMath, null, 2));
   "enumerable": false,
   "configurable": false
 }*/
+
+Math.PI = 3;
+console.log("Math.PI: ", Math.PI); // 3.141592653589793
+
+const user_6 = {};
+Object.defineProperty(user_6, "name", {
+    value: "Yuriy"
+});
+
+console.log("user_6:", user_6);
+const descriptorObj = Object.getOwnPropertyDescriptor(user_6, "name");
+console.log(JSON.stringify(descriptorObj, null, 2));
+
+user_6.name = "New Name";
+console.log("user_6:", user_6);
+
+delete user_6.name;
+console.log("user_6:", user_6);
+
+Object.defineProperty(user_6, "name", {
+    value: "Next name",
+    writable: true,
+    enumerable: true,
+    configurable: true
+}); // TypeError: Cannot redefine property: name
+
+const descriptorObjNext = Object.getOwnPropertyDescriptor(user_6, "name");
+console.log(JSON.stringify(descriptorObjNext, null, 2));

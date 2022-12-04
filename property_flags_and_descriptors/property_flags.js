@@ -97,12 +97,24 @@ console.log("user_6:", user_6);
 delete user_6.name;
 console.log("user_6:", user_6);
 
-Object.defineProperty(user_6, "name", {
+/*Object.defineProperty(user_6, "name", {
     value: "Next name",
     writable: true,
     enumerable: true,
     configurable: true
-}); // TypeError: Cannot redefine property: name
+});*/ // TypeError: Cannot redefine property: name
 
 const descriptorObjNext = Object.getOwnPropertyDescriptor(user_6, "name");
 console.log(JSON.stringify(descriptorObjNext, null, 2));
+
+/*Object.defineProperties(obj, {
+    prop1: descriptor1,
+    prop2: descriptor2
+});*/
+const user_7 = {};
+Object.defineProperties(user_7, {
+    name: {value: "Alex", writable: true, enumerable: true, configurable: true},
+    surname: {value: "Family", writable: true, enumerable: true, configurable: true}
+});
+
+console.log("user_7: ", user_7);

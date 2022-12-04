@@ -69,3 +69,12 @@ for (let prop in user_5) {
 }
 
 console.log(Object.keys(user_5));
+
+let descriptorMath = Object.getOwnPropertyDescriptor(Math, "PI");
+console.log(JSON.stringify(descriptorMath, null, 2));
+/*{
+  "value": 3.141592653589793,
+  "writable": false,
+  "enumerable": false,
+  "configurable": false
+}*/

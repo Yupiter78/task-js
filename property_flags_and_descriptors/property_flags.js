@@ -113,8 +113,22 @@ console.log(JSON.stringify(descriptorObjNext, null, 2));
 });*/
 const user_7 = {};
 Object.defineProperties(user_7, {
-    name: {value: "Alex", writable: true, enumerable: true, configurable: true},
+    name: {value: "Alex", writable: false, enumerable: true, configurable: true},
     surname: {value: "Family", writable: true, enumerable: true, configurable: true}
 });
 
 console.log("user_7: ", user_7);
+console.log("user_7: ", Object.getOwnPropertyDescriptors(user_7));
+
+const clone = Object.defineProperties({}, Object.getOwnPropertyDescriptors(user_7));
+// клонирование объекта вместе с его флагами
+
+console.log("clone: ", Object.getOwnPropertyDescriptors(clone));
+console.log("user_7 === clone: ", user_7 === clone);
+
+const clone_2 = {};
+for (let key in user_7) {
+    clone_2[key] = user_7[key];
+}
+console.log("clone_2: ", Object.getOwnPropertyDescriptors(clone_2));
+// клонирование через цикл for in не копирует флаги свойств

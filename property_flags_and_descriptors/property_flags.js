@@ -160,3 +160,24 @@ const user_10 = {
 Object.freeze(user_10); // запрещает добавлять/удалять/изменять свойства.
 // Устанавливает configurable: false, writable: false для всех имеющихся свойствю
 console.log("user_10: ", Object.getOwnPropertyDescriptors(user_10));
+
+const user_11 = {
+    name: "Tom",
+    surname: "Jerry"
+}
+
+console.log("user_8 isExtensible; ", Object.isExtensible(user_8));
+console.log("user_9 isExtensible; ", Object.isExtensible(user_9));
+console.log("user_10 isExtensible; ", Object.isExtensible(user_10));
+console.log("user_11 isExtensible; ", Object.isExtensible(user_11));
+
+console.log("user_8 isSealed; ", Object.isSealed(user_8));
+console.log("user_9 isSealed; ", Object.isSealed(user_9));
+console.log("user_10 isSealed; ", Object.isSealed(user_10));
+console.log("user_11 isSealed; ", Object.isSealed(user_11));
+
+console.log("user_8 isFrozen; ", Object.isFrozen(user_8));
+console.log("user_9 isFrozen; ", Object.isFrozen(user_9));
+console.log("user_10 isFrozen; ", Object.isFrozen(user_10));
+console.log("user_11 isFrozen; ", Object.isFrozen(user_11));
+

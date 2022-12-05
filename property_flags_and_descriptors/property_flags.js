@@ -181,3 +181,22 @@ console.log("user_9 isFrozen; ", Object.isFrozen(user_9));
 console.log("user_10 isFrozen; ", Object.isFrozen(user_10));
 console.log("user_11 isFrozen; ", Object.isFrozen(user_11));
 
+let user_12 = {
+    name: "John",
+    surname: "Smith"
+};
+
+Object.defineProperty(user_12, 'fullName', {
+    get() {
+        return `${this.name} ${this.surname}`;
+    },
+
+    set(value) {
+        [this.name, this.surname] = value.split(" ");
+    }
+});
+
+console.log(user_12.fullName); // John Smith
+
+for(let key in user_12) console.log(key); // name, surname
+

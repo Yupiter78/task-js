@@ -131,4 +131,32 @@ for (let key in user_7) {
     clone_2[key] = user_7[key];
 }
 console.log("clone_2: ", Object.getOwnPropertyDescriptors(clone_2));
-// клонирование через цикл for in не копирует флаги свойств
+// клонирование через цикл for in не копирует флаги свойств и
+// игнорирует символьные и неперечислимые свойства.
+// Object.getOwnPropertyDescriptors возвращает дескрипторы всех свойств
+
+const user_8 = {
+    name: "Victor"
+}
+
+Object.preventExtensions(user_8); // запрещает добавлять новые свойства в объект
+console.log("user_8: ", Object.getOwnPropertyDescriptors(user_8));
+user_8.surname = "Family";
+console.log("user_8: ", Object.getOwnPropertyDescriptors(user_8));
+
+const user_9 = {
+    name: "Alice"
+}
+
+Object.seal(user_9); // запрещает добавлять/удалять свойства.
+// Устанавливает configurable: false для всех существющих свойств.
+console.log("user_9: ", Object.getOwnPropertyDescriptors(user_9));
+
+const user_10 = {
+    name: "Tom",
+    surname: "Jerry"
+}
+
+Object.freeze(user_10); // запрещает добавлять/удалять/изменять свойства.
+// Устанавливает configurable: false, writable: false для всех имеющихся свойствю
+console.log("user_10: ", Object.getOwnPropertyDescriptors(user_10));

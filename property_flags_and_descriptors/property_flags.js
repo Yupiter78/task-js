@@ -200,3 +200,32 @@ console.log(user_12.fullName); // John Smith
 
 for(let key in user_12) console.log(key); // name, surname
 
+// Error: Invalid property descriptor.
+/*Object.defineProperty({}, 'prop', {
+    get() {
+        return 1
+    },
+
+    value: 2
+});*/
+
+let user_13 = {
+    get name() {
+        return this._name;
+    },
+
+    set name(value) {
+        if (value.length < 4) {
+            console.log("Имя слишком короткое, должно быть более 4 символов");
+            return;
+        }
+        this._name = value;
+    }
+};
+
+user_13.name = "Pete";
+console.log(user_13.name); // Pete
+
+user_13.name = ""; // Имя слишком короткое...
+console.log("user_13: ", user_13);
+

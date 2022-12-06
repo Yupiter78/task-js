@@ -44,3 +44,22 @@ for (let key in user_2) {
 }
 
 console.log("user_2 descriptors: ", JSON.stringify(Object.getOwnPropertyDescriptors(user_2), null, 4));
+
+const user_3 = {
+    get name() {
+        return this._name;
+    },
+    set name(value) {
+        if(value.length < 4) {
+            console.log(`Имя из ${value.length} символов слишком короткое, должно быть более 4 символов`);
+            return;
+        }
+        this._name = value;
+    }
+};
+
+user_3.name = "Alice";
+console.log("user_3: ", user_3);
+
+user_3.name = "Tom";
+

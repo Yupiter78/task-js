@@ -193,12 +193,15 @@ Object.defineProperty(user_12, 'fullName', {
 
     set(value) {
         [this.name, this.surname] = value.split(" ");
-    }
+    },
+    /*enumerable: true,
+    configurable: true*/
 });
 
 console.log(user_12.fullName); // John Smith
+console.log("user_12 descriptors: ", JSON.stringify(Object.getOwnPropertyDescriptors(user_12)));
 
-for(let key in user_12) console.log(key); // name, surname
+for(let key in user_12) console.log("user_12 property for in: ", key); // name, surname
 
 // Error: Invalid property descriptor.
 /*Object.defineProperty({}, 'prop', {
@@ -210,6 +213,7 @@ for(let key in user_12) console.log(key); // name, surname
 });*/
 
 let user_13 = {
+    _name: "Start",
     get name() {
         return this._name;
     },
@@ -223,6 +227,8 @@ let user_13 = {
     }
 };
 
+console.log(user_13.name);
+console.log("user_13: ", user_13);
 user_13.name = "Pete";
 console.log(user_13.name); // Pete
 

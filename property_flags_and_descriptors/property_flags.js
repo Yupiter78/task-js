@@ -199,7 +199,7 @@ Object.defineProperty(user_12, 'fullName', {
 });
 
 console.log(user_12.fullName); // John Smith
-console.log("user_12 descriptors: ", JSON.stringify(Object.getOwnPropertyDescriptors(user_12)));
+console.log("user_12 descriptors: ", JSON.stringify(Object.getOwnPropertyDescriptors(user_12), null, 2));
 
 for(let key in user_12) console.log("user_12 property for in: ", key); // name, surname
 

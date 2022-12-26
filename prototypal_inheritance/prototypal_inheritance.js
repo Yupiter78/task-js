@@ -50,3 +50,18 @@ rabbit.sleep();
 
 console.log(rabbit.isSleeping); // true
 console.log(animal.isSleeping); // undefined (нет такого свойства в прототипе)
+
+let animal_2 = {
+    eats: true
+};
+
+let rabbit_2 = {
+    jumps: true,
+    __proto__: animal
+};
+
+// Object.keys возвращает только собственные ключи
+console.log(Object.keys(rabbit_2)); // jumps
+
+// for..in проходит и по своим, и по унаследованным ключам
+for(let prop in rabbit_2) console.log(prop); // jumps, затем eats

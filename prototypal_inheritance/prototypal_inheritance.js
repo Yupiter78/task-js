@@ -57,7 +57,7 @@ let animal_2 = {
 
 let rabbit_2 = {
     jumps: true,
-    __proto__: animal
+    __proto__: animal_2
 };
 
 // Object.keys возвращает только собственные ключи
@@ -65,3 +65,23 @@ console.log(Object.keys(rabbit_2)); // jumps
 
 // for..in проходит и по своим, и по унаследованным ключам
 for(let prop in rabbit_2) console.log(prop); // jumps, затем eats
+
+
+let animal_3 = {
+    eats: true
+};
+
+let rabbit_3 = {
+    jumps: true,
+    __proto__: animal_3
+};
+
+for(let prop in rabbit_3) {
+    let isOwn = rabbit_3.hasOwnProperty(prop);
+
+    if (isOwn) {
+        console.log(`Our: ${prop}`); // Our: jumps
+    } else {
+        console.log(`Inherited: ${prop}`); // Inherited: eats
+    }
+}

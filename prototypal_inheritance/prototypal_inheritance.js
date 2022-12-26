@@ -26,3 +26,27 @@ console.log(user.name); // John
 console.log(user.surname); // Smith
 console.log("user:", user);
 console.log("admin:", admin);
+
+
+// методы animal
+let animal = {
+    walk() {
+        if (!this.isSleeping) {
+            alert(`I walk`);
+        }
+    },
+    sleep() {
+        this.isSleeping = true;
+    }
+};
+
+let rabbit = {
+    name: "White Rabbit",
+    __proto__: animal
+};
+
+// модифицирует rabbit.isSleeping
+rabbit.sleep();
+
+console.log(rabbit.isSleeping); // true
+console.log(animal.isSleeping); // undefined (нет такого свойства в прототипе)

@@ -41,3 +41,46 @@ function factorial(n) {
 factorial[1] = 1; // Initialize the cache to hold this base case.
 console.log("factorial:", factorial(6)); // => 720
 factorial[5] // => 120; the call above caches this value
+
+
+// Closures
+let scope = "global scope"; // A global variable
+
+function checkScope() {
+    let scope = "local scope"; // A local variable
+    function f() { return scope; } // Return the value in scope here
+    return f();
+}
+console.log("checkScope():", checkScope());// => "local scope"
+
+function checkScope_2() {
+    let scope = "local scope"; // A local variable
+    function f() { return scope; } // Return the value in scope here
+    return f;
+}
+let s = checkScope_2()(); // What does this
+console.log("s:", s);
+
+let uniqueInteger_2 = (function() { // Define and invoke
+    let counter = 0; // Private state of function below
+    return function() { return counter++; };
+}());
+console.log(uniqueInteger_2()) // => 0
+console.log(uniqueInteger_2()) // => 1
+
+function counter() {
+    let n = 0;
+    return {
+        count: function() { return n++; },
+        reset: function() {
+            n = 0;
+            return `n = ${n}`;
+        }
+    };
+}
+let c = counter(), d = counter(); // Create two counters
+console.log(c.count()) // => 0
+console.log(d.count()) // => 0: they count independently
+console.log(c.reset()); // reset() and count() methods share state
+console.log(c.count()) // => 0: because we reset c
+console.log(d.count()) // => 1: d was not reset

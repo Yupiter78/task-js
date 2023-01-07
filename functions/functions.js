@@ -84,3 +84,24 @@ console.log(d.count()) // => 0: they count independently
 console.log(c.reset()); // reset() and count() methods share state
 console.log(c.count()) // => 0: because we reset c
 console.log(d.count()) // => 1: d was not reset
+
+function counter_2(n) {
+    return {
+        get count() {
+            return n++;
+        },
+        set count(value) {
+            if (value > n) {
+                n = value;
+            } else throw Error("count can only be set to a larger value")
+        }
+    }
+}
+
+let c_2 = counter_2(1000);
+console.log("c_2.count", c_2.count);
+console.log("c_2.count", c_2.count);
+console.log("c_2.count", c_2.count);
+console.log("c_2.count", c_2.count(2000));
+console.log("c_2.count", c_2.count);
+console.log("c_2.count", c_2.count);

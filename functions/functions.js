@@ -102,6 +102,17 @@ let c_2 = counter_2(1000);
 console.log("c_2.count", c_2.count);
 console.log("c_2.count", c_2.count);
 console.log("c_2.count", c_2.count);
-console.log("c_2.count", c_2.count(2000));
+console.log("c_2.count:", c_2.count = 2000);
 console.log("c_2.count", c_2.count);
 console.log("c_2.count", c_2.count);
+
+
+// Filter through function
+function inBetween(a, b) {
+    return function (x) {
+        return x >= a && x <= b;
+    }
+}
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(arr.filter(inBetween(3, 6)));

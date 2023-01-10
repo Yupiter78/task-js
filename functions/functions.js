@@ -162,4 +162,34 @@ function addPrivateProperty(o, name, predicate) {
 addPrivateProperty(o, "Name", x => typeof x === "string");
 o.setName("Frank"); // Set the property value
 console.log(o.getName()); // => "Frank"
-console.log(o.setName(0)); // !TypeError: try to set a value of the wrong type
+//console.log(o.setName(0)); // !TypeError: try to set a value of the wrong type
+
+
+// This function returns a function that always returns v
+function constFunc(v) { return () => v; }
+// Create an array of constant functions:
+let funcs = [];
+for(var i = 0; i < 10; i++) funcs[i] = constFunc(i);
+// The function at array element 5 returns the value 5.
+console.log("funcs[5]():", funcs[5]()) // => 5
+
+// Return an array of functions that return the values 0-9
+function constFuncs_2() {
+    let funcs_2 = [];
+    for(var i = 0; i < 10; i++) {
+        funcs_2[i] = () => i;
+    }
+    return funcs_2;
+}
+let funcs_2 = constFuncs_2();
+console.log("funcs_2[5]():", funcs_2[5]()) // => 10; Why doesn't this return 5?
+
+function constFuncs_3() {
+    let funcs_3 = [];
+    for(let i = 0; i < 10; i++) { // changed var to let
+        funcs_3[i] = () => i;
+    }
+    return funcs_3;
+}
+let funcs_3 = constFuncs_3();
+console.log("funcs_3[5]():", funcs_3[5]())

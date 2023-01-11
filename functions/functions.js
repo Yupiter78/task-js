@@ -192,4 +192,48 @@ function constFuncs_3() {
     return funcs_3;
 }
 let funcs_3 = constFuncs_3();
-console.log("funcs_3[5]():", funcs_3[5]())
+console.log("funcs_3[5]():", funcs_3[5]());
+
+
+// This function takes a function and returns a wrapped version
+function timed(f) {
+    return function(...args) { // Collect args into a rest parameter array
+        console.log(`Entering function ${f.name}`);
+        let startTime = Date.now();
+        try {
+// Pass all of our arguments to the wrapped function
+            return f(...args); // Spread the args back out again
+        }
+        finally {
+// Before we return the wrapped return value, print elapsed time.
+            console.log(`Exiting ${f.name} after ${Date.now() - startTime}ms`);
+        }
+    };
+}
+// Compute the sum of the numbers between 1 and n by brute force
+function benchmark(n) {
+    let sum = 0;
+    console.log("Sum of natural numbers:", n * (n + 1) / 2);
+    for(let i = 1; i <= n; i++) sum += i;
+    return sum;
+}
+// Now invoke the timed version of that test function
+console.log(timed(benchmark)(1000000)) // => 500000500000; this is the sum of the numbers
+
+
+
+
+const o_2 = {};
+o_2.m = benchmark;
+// Replace the method named m of the object o with a version that logs
+// messages before and after invoking the original method.
+function trace(o, m) {
+    let original = o[m]; // Remember original method in the closure.
+        o[m] = function(...args) { // Now define the new method.
+        console.log(new Date(), "Entering:", m); // Log message.
+            let result = original.apply(this, args); // Invoke original.
+        console.log(new Date(), "Exiting:", m); // Log message.
+            return result; // Return result.
+    };
+}
+

@@ -241,3 +241,47 @@ trace(o_2, "sum");
 
 console.log("o_2:", o_2);
 console.log("o_2.sum(1000000):", o_2.sum(1000000));
+
+
+// Functional Programming
+
+// nonfunctional style:
+let data = [1,1,3,5,5]; // This is our array of numbers
+// The mean is the sum of the elements divided by the number of elements
+let total = 0;
+for(let i = 0; i < data.length; i++) total += data[i];
+let mean = total/data.length; // mean == 3; The mean of our data is 3
+// To compute the standard deviation, we first sum the squares of
+// the deviation of each element from the mean.
+total = 0;
+for(let i = 0; i < data.length; i++) {
+    let deviation = data[i] - mean;
+    total += deviation * deviation;
+}
+let stddev = Math.sqrt(total/(data.length-1));
+console.log("stddev:", stddev)// stddev == 2
+
+
+// We can perform these same computations in concise functional style
+// using the array methods map() and reduce()
+// First, define two simple functions
+const sum = (x, y) => x + y;
+const square = x => x * x;
+// Then use those functions with Array methods to compute mean and stddev
+
+let mean_2 = data.reduce(sum) / data.length; // mean == 3
+let deviations = data.map(x => x - mean_2);
+let stddev_2 = Math.sqrt(deviations.map(square).reduce(sum)/(data.length - 1));
+console.log("stddev_2:", stddev_2) // => 2
+
+//This new version of the code looks quite different than the first one,
+// but it is still invoking methods on objects, so it has some objectoriented
+// conventions remaining. Let’s write functional versions of the
+// map() and reduce() methods:
+const map = function(a, ...args) { return a.map(...args); };
+const reduce = function(a, ...args) { return a.reduce(...args); };
+
+let mean_3 = reduce(data, sum) / data.length;
+let deviations_2 = map(data, x => x - mean_3);
+let stddev_3 = Math.sqrt(reduce( map(deviations_2, square), sum) / (data.length - 1));
+console.log("stddev_3:", stddev_3) // => 2

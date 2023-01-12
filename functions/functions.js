@@ -285,3 +285,18 @@ let mean_3 = reduce(data, sum) / data.length;
 let deviations_2 = map(data, x => x - mean_3);
 let stddev_3 = Math.sqrt(reduce( map(deviations_2, square), sum) / (data.length - 1));
 console.log("stddev_3:", stddev_3) // => 2
+
+
+// Higher-Order Functions
+// This higher-order function returns a new function that passes its
+// arguments to f and returns the logical negation of f's return value;
+function not(f) {
+    return function(...args) { // Return a new function
+        let result = f.apply(this, args); // that calls f
+        console.log("result:", result);
+        return !result; // and negates its result.
+    };
+}
+const even = x => x % 2 === 0; // A function to determine if a number is even
+const odd = not(even); // A new function that does the opposite
+    console.log("[1,1,3,5,5].every(odd):", [1,1,3,5,5].every(odd)); // => true: every element of the array is odd

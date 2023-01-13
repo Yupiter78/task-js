@@ -300,3 +300,43 @@ function not(f) {
 const even = x => x % 2 === 0; // A function to determine if a number is even
 const odd = not(even); // A new function that does the opposite
     console.log("[1,1,3,5,5].every(odd):", [1,1,3,5,5].every(odd)); // => true: every element of the array is odd
+
+function partialLeft(f, ...outerArgs) {
+    return function (...innerArgs) {
+        let args = [...outerArgs, ...innerArgs];
+        return f.apply(this, args);
+    }
+}
+
+const func = (x, y, z) => x * (y - z);
+
+
+console.log("partialLeft(func, 2)(3, 4):", partialLeft(func, 2)(3, 4));
+// => -2: Bind first argument: 2 * (3 - 4)
+
+function partialRight(f, ...outerArgs) {
+    return function (...innerArgs) {
+        let args = [...innerArgs, ...outerArgs];
+        return f.apply(this, args);
+    }
+}
+
+console.log("partialRight(func, 2)(3, 4):", partialRight(func, 2)(3, 4));
+// => 6: Bind last argument: 3 * (4 - 2)
+
+function partial(f, ...outerArgs) {
+    return function (...innerArgs) {
+        const args = [...outerArgs];
+        let innerIndex = 0;
+        for (let i = 0; i < args.length; i++) {
+            if (args[i] === undefined) {
+                args[i] = innerArgs[innerIndex++];
+            }
+        }
+        args.push(...innerArgs.slice(innerIndex))
+        return f.apply(this, args);
+    }
+}
+
+console.log("partial(func, undefined, 2)(3, 4):", partial(func, undefined, 2)(3, 4));
+// => -6: Bind middle argument: 3 * (2 - 4)

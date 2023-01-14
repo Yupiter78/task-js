@@ -340,3 +340,23 @@ function partial(f, ...outerArgs) {
 
 console.log("partial(func, undefined, 2)(3, 4):", partial(func, undefined, 2)(3, 4));
 // => -6: Bind middle argument: 3 * (2 - 4)
+
+
+const increment = partialLeft(sum, 1);
+const cubeRoot = partialRight(Math.pow, 1 / 3);
+console.log(cubeRoot(increment(26)));
+
+
+function compose(f, g) {
+    return function (...args) {
+        return f.call(this, g.apply(this, args));
+    }
+}
+
+console.log("compose(square, sum)(2, 3):", compose(square, sum)(2, 3));
+
+const not_2 = partialLeft(compose, x => !x);
+const even_2 = x => x % 2 === 0;
+const odd_2 = not_2(even_2);
+const isNumber = not_2(isNaN);
+console.log("odd_2(3) && isNumber(2)", odd_2(3) && isNumber(2));

@@ -377,4 +377,44 @@ const user = {
 
 user.sayHi = partial_2(user.say, `${new Date().getHours()} : ${new Date().getMinutes()}`);
 
-console.log(user.sayHi("Hello"));
+user.sayHi("Hello");
+
+
+function askPassword(ok, fail) {
+    let password = prompt("Password?", '');
+    if (password === "rockstar") ok();
+    else fail();
+}
+
+let user_2 = {
+    name: 'Вася',
+
+    loginOk() {
+        console.log("loginOk:", `${this.name} logged in`);
+    },
+
+    loginFail() {
+        console.log("loginFail:", `${this.name} failed to log in`);
+    },
+
+};
+
+askPassword(user_2.loginOk.bind(user_2), user_2.loginFail.bind(user_2));
+askPassword(() => user_2.loginOk(), () => user_2.loginFail());
+
+function askPassword_2(ok, fail) {
+    let password = prompt("Password?", '');
+    if (password === "rockstar") ok();
+    else fail();
+}
+
+let user_3 = {
+    name: 'John',
+
+    login(result) {
+        console.log( this.name + (result ? ' logged in' : ' failed to log in') );
+    }
+};
+
+askPassword_2(() => user_3.login(true), () => user_3.login(false));
+askPassword_2(user_3.login.bind(user_3, true), user_3.login.bind(user_3, false));

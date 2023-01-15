@@ -360,3 +360,21 @@ const even_2 = x => x % 2 === 0;
 const odd_2 = not_2(even_2);
 const isNumber = not_2(isNaN);
 console.log("odd_2(3) && isNumber(2)", odd_2(3) && isNumber(2));
+
+
+function partial_2(func, ...argsBound) {
+    return function (...args) {
+        return func.call(this, ...argsBound, ...args);
+    }
+}
+
+const user = {
+    firstName: "John",
+    say(time, phrase) {
+        console.log(`[${time}] ${this.firstName}: ${phrase}!`);
+    }
+}
+
+user.sayHi = partial_2(user.say, `${new Date().getHours()} : ${new Date().getMinutes()}`);
+
+console.log(user.sayHi("Hello"));

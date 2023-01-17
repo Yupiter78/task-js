@@ -399,8 +399,8 @@ let user_2 = {
 
 };
 
-askPassword(user_2.loginOk.bind(user_2), user_2.loginFail.bind(user_2));
-askPassword(() => user_2.loginOk(), () => user_2.loginFail());
+// askPassword(user_2.loginOk.bind(user_2), user_2.loginFail.bind(user_2));
+// askPassword(() => user_2.loginOk(), () => user_2.loginFail());
 
 function askPassword_2(ok, fail) {
     let password = prompt("Password?", '');
@@ -416,5 +416,19 @@ let user_3 = {
     }
 };
 
-askPassword_2(() => user_3.login(true), () => user_3.login(false));
-askPassword_2(user_3.login.bind(user_3, true), user_3.login.bind(user_3, false));
+// askPassword_2(() => user_3.login(true), () => user_3.login(false));
+// askPassword_2(user_3.login.bind(user_3, true), user_3.login.bind(user_3, false));
+
+
+let group = {
+    title: "Our Group",
+    students: ["John", "Pete", "Alice"],
+
+    showList() {
+        this.students.forEach(
+            student => console.log(this.title + ': ' + student)
+        );
+    }
+};
+
+group.showList();

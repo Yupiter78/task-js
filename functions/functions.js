@@ -420,6 +420,22 @@ let user_3 = {
 // askPassword_2(user_3.login.bind(user_3, true), user_3.login.bind(user_3, false));
 
 
+// We can also use composition and partial application to redo our mean
+// and standard deviation calculations in extreme functional style:
+// sum() and square() functions are defined above. Here are some more:
+const product = (x,y) => x * y;
+const neg = partial(product, -1);
+const sqrt = partial(Math.pow, undefined, .5);
+const reciprocal = partial(Math.pow, undefined, neg(1));
+// Now compute the mean and standard deviation.
+let data_2 = [1,1,3,5,5]; // Our data_2
+let mean_4 = product(reduce(data_2, sum), reciprocal(data_2.length));
+let stddev_4 = sqrt(product( reduce( map(data_2, compose( square, partial( sum, neg( mean_4 ) ) ) ), sum),
+    reciprocal(sum( data_2.length,neg(1) ) ) ) );
+console.log([mean_4, stddev_4]); // => [3, 2]
+
+
+// Arrow functions have no “this”
 let group = {
     title: "Our Group",
     students: ["John", "Pete", "Alice"],
@@ -432,3 +448,5 @@ let group = {
 };
 
 group.showList();
+
+

@@ -470,12 +470,12 @@ group.showList();
 
 // Return the Greatest Common Divisor of two integers using the Euclidian
 // algorithm: http://en.wikipedia.org/wiki/Euclidean_algorithm
-    function gcd(a,b) { // Type checking for a and b has been omitted
+    function gcd(a, b) { // Type checking for a and b has been omitted
         if (a < b) { // Ensure that a >= b when we start
                 [a, b] = [b, a]; // Destructuring assignment to swap variables
         }
         while(b !== 0) { // This is Euclid's algorithm for GCD
-                [a, b] = [b, a%b];
+                [a, b] = [b, a % b];
         }
         return a;
     }
@@ -484,7 +484,7 @@ console.log("gcdMemo(85, 187):", gcdMemo(85, 187), "=> 17") // => 17
 // Note that when we write a recursive function that we will be memoizing,
 // we typically want to recurse to the memoized version, not the original.
     const factorial_2 = memoize(function(n) {
-    return (n <= 1) ? 1 : n * factorial_2(n-1);
+    return (n <= 1) ? 1 : n * factorial_2(n - 1);
 });
 console.log("factorial_2(5):", factorial_2(5), "=> 120"); // => 120: also caches values for 4, 3, 2 and 1.
 

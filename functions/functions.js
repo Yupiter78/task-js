@@ -489,3 +489,38 @@ console.log("gcdMemo(85, 187):", gcdMemo(85, 187), "=> 17") // => 17
 console.log("factorial_2(5):", factorial_2(5), "=> 120"); // => 120: also caches values for 4, 3, 2 and 1.
 
 
+// Here is the general-purpose currying function:
+function schonfinkelize(fn) {
+    const slice = Array.prototype.slice,
+        stored_args = slice.call(arguments, 1);
+    return function () {
+        const new_args = slice.call(arguments),
+            args = stored_args.concat(new_args);
+        return fn.apply(null, args);
+    };
+}
+
+// a normal function
+function add_3(x, y) {
+    return x + y;
+}
+// curry a function to get a new function
+const newAdd = schonfinkelize(add_3, 5);
+console.log(newAdd(4), "=> 9"); // 9
+// another option -- call the new function directly
+console.log(schonfinkelize(add_3, 6)(7), "=> 13"); // 13
+//The transformation function schonfinkelize() is not limited to single parameters or to
+//single-step currying. Here are some more usage examples:
+// a normal function
+    function add_4(a, b, c, d, e) {
+        return a + b + c + d + e;
+    }
+// works with any number of arguments
+schonfinkelize(add_4, 1, 2, 3)(5, 5); // 16
+// two-step currying
+const addOne = schonfinkelize(add_4, 1);
+console.log(addOne(10, 10, 10, 10), "=> 41"); // 41
+const addSix = schonfinkelize(addOne, 2, 3);
+console.log(addSix(5, 5), "=> 16"); // 16
+
+

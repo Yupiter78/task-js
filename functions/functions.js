@@ -167,6 +167,7 @@ console.log(o.getName()); // => "Frank"
 
 // This function returns a function that always returns v
 function constFunc(v) { return () => v; }
+
 // Create an array of constant functions:
 let funcs = [];
 for(var i = 0; i < 10; i++) funcs[i] = constFunc(i);

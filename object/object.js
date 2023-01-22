@@ -11,3 +11,13 @@ let q = {};
 let e = q;
 e = null;
 console.log(q);
+
+
+
+var x = 1, foo = {}
+
+foo: {
+    x: 2
+    y: ++x
+}
+console.log(foo.y + foo.x + x); // => NaN

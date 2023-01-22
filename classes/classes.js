@@ -67,3 +67,32 @@ let r_2 = new Range(1,3); // Create a Range object; note the use of new
 console.log(r_2.includes(2), "=> true") // => true: 2 is in the range
 console.log(r_2.toString(), "=> (1...3)"); // => "(1...3)"
 console.log([...r_2], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
+
+
+// 9.3 Classes with the class Keyword
+
+// Example 9-3. The Range class rewritten using class
+class newRange {
+    constructor(from, to) {
+// Store the start and end points (state) of this new range object.
+// These are non inherited properties that are unique to this object.
+        this.from = from;
+        this.to = to;
+    }
+// Return true if x is in the range, false otherwise
+// This method works for textual and Date ranges as well as numeric.
+    includes(x) { return this.from <= x && x <= this.to; }
+// A generator function that makes instances of the class iterable.
+// Note that it only works for numeric ranges.
+    *[Symbol.iterator]() {
+        for(let x = Math.ceil(this.from); x <= this.to; x++)
+            yield x;
+    }
+// Return a string representation of the range
+    toString() { return `(${this.from}...${this.to})`; }
+}
+// Here are example uses of this new Range class
+let r_3 = new newRange(1,3); // Create a Range object
+console.log(r_3.includes(2), "=> true") // => true: 2 is in the range
+console.log(r_3.toString(), "=> (1...3)"); // => "(1...3)"
+console.log([...r_3], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator

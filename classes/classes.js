@@ -204,3 +204,74 @@ console.log("c.plus(d).toString():", c.plus(d).toString(), "=> {5,5}"); // => "{
 console.log("c.magnitude:", c.magnitude, "Math.hypot(2,3)"); // => Math.hypot(2,3); use a getter function
 console.log("Complex.product(c, d):", Complex.product(c, d), "new Complex(0, 13)"); // => new Complex(0, 13); a static method
 console.log("Complex.ZERO.toString():", Complex.ZERO.toString(), "=> {0,0}") // => "{0,0}"; a static property
+
+
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+    sayHi() {
+        alert(this.name);
+    }
+}
+
+// Использование:
+let user = new User("Иван");
+console.log("user:", user);
+
+function Dog(name, breed, weight) {
+    this.name = name;
+    this.breed = breed;
+    this.weight = weight;
+    this.bark = function() {
+        if (this.weight > 25) {
+            console.log(this.name + " says Woof!");
+        } else {
+            console.log(this.name + " says Yip!");
+        }
+    };
+}
+
+const fido = new Dog("Fido", "Mixed", 38);
+const fluffy = new Dog("Fluffy", "Poodle", 30);
+const spot = new Dog("Spot", "Chihuahua", 10);
+const dogs = [fido, fluffy, spot];
+for (let i = 0; i < dogs.length; i++) {
+    console.log(dogs[i]);
+    dogs[i].bark();
+}
+
+function ShowDog(name, breed, weight, handler) {
+    Dog.call(this, name, breed, weight);
+    this.handler = handler;
+}
+ShowDog.prototype = new Dog();
+ShowDog.prototype.constructor = ShowDog;
+ShowDog.prototype.league = "Webville";
+ShowDog.prototype.stack = function() {
+    console.log("Stack");
+};
+ShowDog.prototype.bait = function() {
+    console.log("Bait");
+};
+ShowDog.prototype.gait = function(kind) {
+    console.log(kind + "ing");
+};
+ShowDog.prototype.groom = function() {
+    console.log("Groom");
+};
+
+const scotty = new ShowDog("Scotty", "Scottish Terrier", 15, "Cookie");
+console.log("scotty:", scotty);
+console.log("scotty.name:", scotty.name);
+
+
+const propScottyObj = {};
+for (let prop of Reflect.ownKeys(scotty)) {
+    propScottyObj[prop] = Reflect.get(scotty, prop);
+}
+
+console.log("propScottyObj:", propScottyObj);
+
+console.log("Object.getPrototypeOf(scotty):", Object.getPrototypeOf(scotty));
+console.log("Object.getPrototypeOf(fido):", Object.getPrototypeOf(fido));

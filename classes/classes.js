@@ -275,8 +275,15 @@ const propScottyObj_2 = Reflect.ownKeys(scotty).reduce((prev, cur) => {
     return prev;
 }, {});
 
+const obj = {};
+const propScottyObj_3 = Reflect.ownKeys(obj).reduce((prev, cur) => {
+    prev[cur] = obj[cur];
+    return prev;
+}, {});
+
 console.log("propScottyObj:", propScottyObj);
 console.log("propScottyObj_2:", propScottyObj_2);
+console.log("propScottyObj_3:", propScottyObj_3);
 
 console.log("Object.getPrototypeOf(scotty):", Object.getPrototypeOf(scotty));
 console.log("Object.getPrototypeOf(fido):", Object.getPrototypeOf(fido));

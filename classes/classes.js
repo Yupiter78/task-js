@@ -319,3 +319,23 @@ user_3 = new User_2(""); // Имя слишком короткое.
 
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
 console.log("descriptor:", JSON.stringify(descriptor, null, 2));
+
+class User_3 {
+
+    ['say' + 'Hi']() {
+        console.log("Привет");
+    }
+}
+
+new User_3().sayHi();
+
+
+class User_4 {
+    name = "Аноним";
+
+    sayHi() {
+        console.log(`Привет, ${this.name}!`);
+    }
+}
+
+new User_4().sayHi();

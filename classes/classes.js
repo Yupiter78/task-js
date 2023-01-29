@@ -116,6 +116,15 @@ function sum(a, b) {
     return a + b;
 }
 
+console.log("sum:", sum);
+console.log("_______________________________-");
+const propSum = Reflect.ownKeys(sum).reduce((prev, cur) => {
+    prev[cur] = sum[cur];
+    return prev;
+}, {});
+
+console.log("propSum:", propSum);
+
 for (let key in sum) {
     console.log(key, ":", sum[key]);
 }
@@ -280,3 +289,29 @@ console.log("propScottyObj_2:", propScottyObj_2);
 
 console.log("Object.getPrototypeOf(scotty):", Object.getPrototypeOf(scotty));
 console.log("Object.getPrototypeOf(fido):", Object.getPrototypeOf(fido));
+
+class User_2 {
+
+    constructor(name) {
+        // вызывает сеттер
+        this.name = name;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(value) {
+        if (value.length < 4) {
+            console.log("Имя слишком короткое.");
+            return;
+        }
+        this._name = value;
+    }
+
+}
+
+let user_3 = new User_2("Иван");
+console.log(user_3.name); // Иван
+
+user_3 = new User_2(""); // Имя слишком короткое.

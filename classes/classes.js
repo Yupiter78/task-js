@@ -315,3 +315,7 @@ let user_3 = new User_2("Иван");
 console.log(user_3.name); // Иван
 
 user_3 = new User_2(""); // Имя слишком короткое.
+
+
+let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
+console.log("descriptor:", JSON.stringify(descriptor, null, 2));

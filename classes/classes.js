@@ -459,3 +459,22 @@ rabbit.run(5); // Белый кролик бежит со скоростью 5.
 rabbit.stop(); // Белый кролик стоит. Белый кролик прячется!
 console.log(rabbit.name); // Белый кролик
 console.log(rabbit.earLength); // 10
+
+
+let animal_2 = {
+    name: "Animal",
+    eat() {
+        console.log(`${this.name} ест.`);
+    }
+};
+
+let rabbit_2 = {
+    __proto__: animal_2,
+    name: "Кролик",
+    eat() {
+        // вот как предположительно может работать super.eat()
+        this.__proto__.eat.call(this); // (*)
+    }
+};
+
+rabbit_2.eat(); // Кролик ест.

@@ -438,6 +438,11 @@ class Animal {
 let animal = new Animal("Мой питомец");
 
 class Rabbit extends Animal {
+    constructor(name, earLength) {
+        super(name);
+        this.speed = 0;
+        this.earLength = earLength;
+    }
     hide() {
         console.log(`${this.name} прячется!`);
     }
@@ -448,7 +453,9 @@ class Rabbit extends Animal {
     }
 }
 
-let rabbit = new Rabbit("Белый кролик");
+let rabbit = new Rabbit("Белый кролик", 10);
 
 rabbit.run(5); // Белый кролик бежит со скоростью 5.
 rabbit.stop(); // Белый кролик стоит. Белый кролик прячется!
+console.log(rabbit.name); // Белый кролик
+console.log(rabbit.earLength); // 10

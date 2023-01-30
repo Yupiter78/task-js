@@ -478,3 +478,28 @@ let rabbit_2 = {
 };
 
 rabbit_2.eat(); // Кролик ест.
+
+let animal_3 = {
+    name: "Животное",
+    eat() {
+        console.log(`${this.name} ест.`);
+    }
+};
+
+let rabbit_3 = {
+    __proto__: animal_3,
+    eat() {
+        // ...делаем что-то специфичное для кролика и вызываем родительский (animal_3) метод
+        this.__proto__.eat.call(this); // (*)
+    }
+};
+
+let longEar = {
+    __proto__: rabbit_3,
+    eat() {
+        // ...делаем что-то, связанное с длинными ушами, и вызываем родительский (rabbit_3) метод
+        this.__proto__.eat.call(this); // (**)
+    }
+};
+
+longEar.eat(); // Error: Maximum call stack size exceeded

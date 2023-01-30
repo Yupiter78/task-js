@@ -502,4 +502,53 @@ let longEar = {
     }
 };
 
-longEar.eat(); // Error: Maximum call stack size exceeded
+// longEar.eat(); // Error: Maximum call stack size exceeded
+
+// 1. Внутри longEar.eat() строка (**) вызывает rabbit.eat со значением this=longEar.
+
+// внутри longEar.eat() у нас this = longEar
+// this.__proto__.eat.call(this) // (**)
+// становится
+// longEar.__proto__.eat.call(this)
+// то же что и
+// rabbit.eat.call(this);
+
+// 2. В строке (*) в rabbit.eat мы хотим передать вызов выше по цепочке, но this=longEar, поэтому this.__proto__.eat снова равен rabbit.eat!
+
+// внутри rabbit.eat() у нас также this = longEar
+// this.__proto__.eat.call(this) // (*)
+// становится
+// longEar.__proto__.eat.call(this)
+// или (снова)
+// rabbit.eat.call(this);
+
+// 3. …rabbit.eat вызывает себя в бесконечном цикле, потому что не может подняться дальше по цепочке.
+
+let animal_4 = {
+    name: "Животное",
+    eat() {         // animal_4.eat.[[HomeObject]] == animal_4
+        console.log(`${this.name} ест.`);
+    }
+};
+
+let rabbit_4 = {
+    __proto__: animal_4,
+    name: "Кролик",
+    eat() {         // rabbit_4.eat.[[HomeObject]] == rabbit_4
+        super.eat();
+    }
+};
+
+let longEar_2 = {
+    __proto__: rabbit_4,
+    name: "Длинноух",
+    eat() {         // longEar_2.eat.[[HomeObject]] == longEar_2
+        super.eat();
+    }
+};
+
+// работает верно
+longEar_2.eat();  // Длинноух ест.
+
+//Это работает как задумано благодаря [[HomeObject]]. Метод, такой как longEar.eat,
+// знает свой [[HomeObject]] и получает метод родителя из его прототипа. Вообще без использования this.

@@ -417,7 +417,7 @@ class Clock_2 {
 }
 
 let clock_2 = new Clock_2({template: 'h:m:s'});
-clock_2.start();
+//clock_2.start();
 
 
 class Animal {
@@ -427,12 +427,28 @@ class Animal {
     }
     run(speed) {
         this.speed = speed;
-        alert(`${this.name} бежит со скоростью ${this.speed}.`);
+        console.log(`${this.name} бежит со скоростью ${this.speed}.`);
     }
     stop() {
         this.speed = 0;
-        alert(`${this.name} стоит неподвижно.`);
+        console.log(`${this.name} стоит неподвижно.`);
     }
 }
 
 let animal = new Animal("Мой питомец");
+
+class Rabbit extends Animal {
+    hide() {
+        console.log(`${this.name} прячется!`);
+    }
+
+    stop() {
+        super.stop(); // вызываем родительский метод stop
+        this.hide(); // и затем hide
+    }
+}
+
+let rabbit = new Rabbit("Белый кролик");
+
+rabbit.run(5); // Белый кролик бежит со скоростью 5.
+rabbit.stop(); // Белый кролик стоит. Белый кролик прячется!

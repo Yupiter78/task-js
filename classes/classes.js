@@ -614,9 +614,15 @@ let clock_3 = new Clock_3({
 //clock_3.start();
 
 class ExtendedClock extends Clock_3{
-    precision = 1000;
-    constructor({template, precision}) {
-        super({template});
+    #precisionDefault = 1000;
+    // constructor({template, precision}) {
+    //     super({template});
+    //     this.precision = precision ?? this.#precisionDefault;
+    // }
+
+    constructor(options) {
+        super(options);
+        let { precision = 1000 } = options;
         this.precision = precision;
     }
     render() {
@@ -624,6 +630,7 @@ class ExtendedClock extends Clock_3{
     }
 
     start() {
+        console.log("this.precision:", this.precision);
         this.render();
         this.timer = setInterval(() => this.render(), this.precision);
     }

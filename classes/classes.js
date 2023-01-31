@@ -552,3 +552,22 @@ longEar_2.eat();  // Длинноух ест.
 
 //Это работает как задумано благодаря [[HomeObject]]. Метод, такой как longEar.eat,
 // знает свой [[HomeObject]] и получает метод родителя из его прототипа. Вообще без использования this.
+
+
+class Animal_5 {
+
+    constructor(name) {
+        this.name = name;
+    }
+
+}
+
+class Rabbit_2 extends Animal_5 {
+    constructor(name) {
+        super(name);
+        this.created = Date.now();
+    }
+}
+
+let rabbit_5 = new Rabbit_2("Белый кролик"); // Белый кролик
+console.log(rabbit_5.name);

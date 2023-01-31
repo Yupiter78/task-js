@@ -625,12 +625,7 @@ class ExtendedClock extends Clock_3{
         let { precision = 1000 } = options;
         this.precision = precision;
     }
-    render() {
-        super.render()
-    }
-
     start() {
-        console.log("this.precision:", this.precision);
         this.render();
         this.timer = setInterval(() => this.render(), this.precision);
     }

@@ -672,3 +672,16 @@ let rabbits = [
 rabbits.sort(Rabbit_3.compare);
 
 rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.
+
+
+class Rabbit_4 extends Object {
+    constructor(name) {
+        super();
+        this.name = name;
+    }
+}
+
+let rabbit_6 = new Rabbit_4("Кроль");
+
+console.log( rabbit_6.hasOwnProperty('name') ); // true
+console.log( Rabbit_4.getOwnPropertyNames({a: 1, b: 2}) ); // a,b

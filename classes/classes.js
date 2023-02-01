@@ -720,3 +720,28 @@ console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 1
 coffeeMachine.power = 25; // Error (no setter)
 
 console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
+
+// Here we used getter/setter syntax.
+//
+// But most of the time get.../set... functions are preferred, like this:
+
+class CoffeeMachine_2 {
+    _waterAmount = 0;
+
+    setWaterAmount(value) {
+        if (value < 0) throw new Error("Отрицательное количество воды");
+        this._waterAmount = value;
+    }
+
+    getWaterAmount() {
+        return this._waterAmount;
+    }
+}
+
+new CoffeeMachine_2().setWaterAmount(100);
+
+// That looks a bit longer, but functions are more flexible.
+// They can accept multiple arguments (even if we don’t need them right now).
+//
+// On the other hand, get/set syntax is shorter, so ultimately there’s no strict rule,
+// it’s up to you to decide.

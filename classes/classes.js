@@ -703,10 +703,20 @@ class CoffeeMachine {
         this._power = power;
     }
 
+    get power() {
+        return this._power;
+    }
+
 }
 
 // создаём новую кофеварку
 let coffeeMachine = new CoffeeMachine(100);
 
 // устанавливаем количество воды
-coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
+// coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
+
+console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
+
+coffeeMachine.power = 25; // Error (no setter)
+
+console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W

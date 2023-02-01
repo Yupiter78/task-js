@@ -637,4 +637,38 @@ class ExtendedClock extends Clock_3{
     precision: 10000
   });
 
-  lowResolutionClock.start();
+  // lowResolutionClock.start();
+
+class Animal_6 {
+
+    constructor(name, speed) {
+        this.speed = speed;
+        this.name = name;
+    }
+
+    run(speed = 0) {
+        this.speed += speed;
+        console.log(`${this.name} бежит со скоростью ${this.speed}.`);
+    }
+
+    static compare(animalA, animalB) {
+        return animalA.speed - animalB.speed;
+    }
+
+}
+
+// Наследует от Animal_6
+class Rabbit_3 extends Animal_6 {
+    hide() {
+        alert(`${this.name} прячется!`);
+    }
+}
+
+let rabbits = [
+    new Rabbit_3("Белый кролик", 10),
+    new Rabbit_3("Чёрный кролик", 5)
+];
+
+rabbits.sort(Rabbit_3.compare);
+
+rabbits[0].run(); // Чёрный кролик бежит со скоростью 5.

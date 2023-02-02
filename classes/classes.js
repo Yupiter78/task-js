@@ -725,6 +725,8 @@ console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 1
 //
 // But most of the time get.../set... functions are preferred, like this:
 
+// Private “#waterLimit”
+
 class CoffeeMachine_2 {
     _waterAmount = 0;
 
@@ -779,4 +781,39 @@ let machine = new CoffeeMachine_3();
 
 machine.waterAmount = 100;
 // console.log(machine.#waterAmount); // Error
+
+// Extending built-in classes
+
+// Built-in classes like Array, Map and others are extendable also.
+//
+// For instance, here PowerArray inherits from the native Array:
+
+// add one more method to it (can do more)
+class PowerArray extends Array {
+    isEmpty() {
+        return this.length === 0;
+    }
+}
+
+let arr = new PowerArray(1, 2, 5, 10, 50);
+console.log(arr.isEmpty()); // false
+
+let filteredArr = arr.filter(item => item >= 10);
+console.log(filteredArr); // 10, 50
+console.log("Array.isArray(filteredArr):", Array.isArray(filteredArr)); // true
+console.log("filteredArr.constructor:", filteredArr.constructor); // class PowerArray extends Array {
+// isEmpty() {
+//     return this.length === 0;
+// }
+// }
+
+console.log(filteredArr.isEmpty()); // false
+console.log("filteredArr.__proto__:", filteredArr.__proto__);
+console.log("filteredArr.__proto__ === Array.prototype:", filteredArr.__proto__ === Array.prototype);
+console.log("filteredArr.__proto__ === PowerArray.prototype:", filteredArr.__proto__ === PowerArray.prototype);
+console.log("filteredArr.__proto__.__proto__ === Array.prototype:", filteredArr.__proto__.__proto__ === Array.prototype);
+console.log("filteredArr.__proto__.__proto__.__proto__ === Object.prototype:",
+    filteredArr.__proto__.__proto__.__proto__ === Object.prototype);
+
+
 

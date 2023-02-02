@@ -799,6 +799,8 @@ let arr = new PowerArray(1, 2, 5, 10, 50);
 console.log(arr.isEmpty()); // false
 
 let filteredArr = arr.filter(item => item >= 10);
+
+console.log("arr.constructor:", arr.constructor);
 console.log(filteredArr); // 10, 50
 console.log("Array.isArray(filteredArr):", Array.isArray(filteredArr)); // true
 console.log("filteredArr.constructor:", filteredArr.constructor); // class PowerArray extends Array {
@@ -814,6 +816,32 @@ console.log("filteredArr.__proto__ === PowerArray.prototype:", filteredArr.__pro
 console.log("filteredArr.__proto__.__proto__ === Array.prototype:", filteredArr.__proto__.__proto__ === Array.prototype);
 console.log("filteredArr.__proto__.__proto__.__proto__ === Object.prototype:",
     filteredArr.__proto__.__proto__.__proto__ === Object.prototype);
+
+console.log("PowerArray.prototype.__proto__:", PowerArray.prototype.__proto__);
+console.log("PowerArray.prototype.__proto__ === Array.prototype:", PowerArray.prototype.__proto__ === Array.prototype);
+console.log("Object.getPrototypeOf(PowerArray.prototype) === Array.prototype:",
+    Object.getPrototypeOf(PowerArray.prototype) === Array.prototype);
+
+
+class PowerArray_2 extends Array {
+    isEmpty() {
+        return this.length === 0;
+    }
+
+    // built-in methods will use this as the constructor
+    static get [Symbol.species]() {
+        return Array;
+    }
+}
+
+let arr_2 = new PowerArray_2(1, 2, 5, 10, 50);
+console.log("arr_2.isEmpty():", arr_2.isEmpty()); // false
+
+// filter creates new array using arr.constructor[Symbol.species] as constructor
+let filteredArr_2 = arr_2.filter(item => item >= 10);
+
+// filteredArr_2 не является PowerArray_2, это Array
+console.log("filteredArr_2.isEmpty():", filteredArr_2.isEmpty()); // Error: filteredArr_2.isEmpty is not a function
 
 
 

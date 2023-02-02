@@ -728,6 +728,13 @@ console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 1
 class CoffeeMachine_2 {
     _waterAmount = 0;
 
+    #waterLimit = 200;
+
+    #checkWater(value) {
+        if (value < 0) throw new Error("Отрицательный уровень воды");
+        if (value > this.#waterLimit) throw new Error("Слишком много воды");
+    }
+
     setWaterAmount(value) {
         if (value < 0) throw new Error("Отрицательное количество воды");
         this._waterAmount = value;
@@ -738,10 +745,38 @@ class CoffeeMachine_2 {
     }
 }
 
-new CoffeeMachine_2().setWaterAmount(100);
+let coffeeMachine_2 = new CoffeeMachine_2();
+coffeeMachine_2.setWaterAmount(100);
 
 // That looks a bit longer, but functions are more flexible.
 // They can accept multiple arguments (even if we don’t need them right now).
 //
 // On the other hand, get/set syntax is shorter, so ultimately there’s no strict rule,
 // it’s up to you to decide.
+
+
+//console.log(coffeeMachine_2.#waterLimit = 1000); // Error
+//console.log(coffeeMachine_2.#checkWater()); // Error
+// On the language level, # is a special sign that the field is private.
+// We can’t access it from outside or from inheriting classes.
+
+class CoffeeMachine_3 {
+
+    #waterAmount = 0;
+
+    get waterAmount() {
+
+        return this.#waterAmount;
+    }
+
+    set waterAmount(value) {
+        if (value < 0) throw new Error("Отрицательный уровень воды");
+        this.#waterAmount = value;
+    }
+}
+
+let machine = new CoffeeMachine_3();
+
+machine.waterAmount = 100;
+// console.log(machine.#waterAmount); // Error
+

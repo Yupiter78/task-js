@@ -1,3 +1,5 @@
+const log = console.log;
+
 //9.1 Classes and Prototypes
 
 // Example 9-1. A simple JavaScript class
@@ -31,9 +33,9 @@ function range(from, to) {
 };
 // Here are example uses of a range object.
 let r = range(1,3); // Create a range object
-console.log(r.includes(2), "=> true") // => true: 2 is in the range
-console.log(r.toString(), "=> (1...3)"); // => "(1...3)"
-console.log([...r], " => [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
+log(r.includes(2), "=> true") // => true: 2 is in the range
+log(r.toString(), "=> (1...3)"); // => "(1...3)"
+log([...r], " => [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
 
 
 // Classes and Constructors
@@ -64,9 +66,9 @@ console.log([...r], " => [1, 2, 3]") // => [1, 2, 3]; convert to an array via it
 };
 // Here are example uses of this new Range class
 let r_2 = new Range(1,3); // Create a Range object; note the use of new
-console.log(r_2.includes(2), "=> true") // => true: 2 is in the range
-console.log(r_2.toString(), "=> (1...3)"); // => "(1...3)"
-console.log([...r_2], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
+log(r_2.includes(2), "=> true") // => true: 2 is in the range
+log(r_2.toString(), "=> (1...3)"); // => "(1...3)"
+log([...r_2], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
 
 // Therefore, every regular JavaScript
 // function automatically has a prototype property. The value of this
@@ -77,10 +79,10 @@ console.log([...r_2], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via i
 let F = function() {}; // This is a function object.
 let p = F.prototype; // This is the prototype object associated with F.
 let constr = p.constructor; // This is the function associated with the prototype.
-console.log("constr === F:", constr === F) // => true: F.prototype.constructor === F for any F
+log("constr === F:", constr === F) // => true: F.prototype.constructor === F for any F
 
 let o = new F(); // Create an object o of class F
-console.log("o.constructor === F:", o.constructor === F) // => true: the constructor property specifies the class
+log("o.constructor === F:", o.constructor === F) // => true: the constructor property specifies the class
 
 
 // 9.3 Classes with the class Keyword
@@ -107,43 +109,43 @@ class newRange {
 }
 // Here are example uses of this new Range class
 let r_3 = new newRange(1,3); // Create a Range object
-console.log(r_3.includes(2), "=> true") // => true: 2 is in the range
-console.log(r_3.toString(), "=> (1...3)"); // => "(1...3)"
-console.log([...r_3], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
+log(r_3.includes(2), "=> true") // => true: 2 is in the range
+log(r_3.toString(), "=> (1...3)"); // => "(1...3)"
+log([...r_3], "=> [1, 2, 3]") // => [1, 2, 3]; convert to an array via iterator
 
 
 function sum(a, b) {
     return a + b;
 }
 
-console.log("sum:", sum);
-console.log("_______________________________-");
+log("sum:", sum);
+log("_______________________________-");
 const propSum = Reflect.ownKeys(sum).reduce((prev, cur) => {
     prev[cur] = sum[cur];
     return prev;
 }, {});
 
-console.log("propSum:", propSum);
+log("propSum:", propSum);
 
 for (let key in sum) {
-    console.log(key, ":", sum[key]);
+    log(key, ":", sum[key]);
 }
 sum.test = "TEST";
 
-console.log("SUM:", Object.getOwnPropertyNames(sum));
+log("SUM:", Object.getOwnPropertyNames(sum));
 
 const keys = Reflect.ownKeys(sum)
-console.log("SUM_ keys:", keys);
+log("SUM_ keys:", keys);
 
 const sumObj = {};
 for (let prop of keys) {
     sumObj[prop] = Reflect.get(sum, prop);
 }
-console.log("sumObj:", sumObj);
-console.log("sum:", sum);
-console.log("sum.test:", sum.test);
+log("sumObj:", sumObj);
+log("sum:", sum);
+log("sum.test:", sum.test);
 console.dir("sum:", sum);
-console.log("sum.prototype:", sum.prototype);
+log("sum.prototype:", sum.prototype);
 
 // Example 9-4. Complex.js: a complex number class:
 /**
@@ -206,13 +208,13 @@ Complex.ONE = new Complex(1,0);
 Complex.I = new Complex(0,1);
 
 let c = new Complex(2, 3); // Create a new object with the constructor
-console.log("c:", c);
+log("c:", c);
 let d = new Complex(c.i, c.r); // Use instance fields of c
-console.log("d:", d);
-console.log("c.plus(d).toString():", c.plus(d).toString(), "=> {5,5}"); // => "{5,5}"; use instance methods
-console.log("c.magnitude:", c.magnitude, "Math.hypot(2,3)"); // => Math.hypot(2,3); use a getter function
-console.log("Complex.product(c, d):", Complex.product(c, d), "new Complex(0, 13)"); // => new Complex(0, 13); a static method
-console.log("Complex.ZERO.toString():", Complex.ZERO.toString(), "=> {0,0}") // => "{0,0}"; a static property
+log("d:", d);
+log("c.plus(d).toString():", c.plus(d).toString(), "=> {5,5}"); // => "{5,5}"; use instance methods
+log("c.magnitude:", c.magnitude, "Math.hypot(2,3)"); // => Math.hypot(2,3); use a getter function
+log("Complex.product(c, d):", Complex.product(c, d), "new Complex(0, 13)"); // => new Complex(0, 13); a static method
+log("Complex.ZERO.toString():", Complex.ZERO.toString(), "=> {0,0}") // => "{0,0}"; a static property
 
 
 class User {
@@ -226,7 +228,7 @@ class User {
 
 // Использование:
 let user = new User("Иван");
-console.log("user:", user);
+log("user:", user);
 
 function Dog(name, breed, weight) {
     this.name = name;
@@ -234,9 +236,9 @@ function Dog(name, breed, weight) {
     this.weight = weight;
     this.bark = function() {
         if (this.weight > 25) {
-            console.log(this.name + " says Woof!");
+            log(this.name + " says Woof!");
         } else {
-            console.log(this.name + " says Yip!");
+            log(this.name + " says Yip!");
         }
     };
 }
@@ -246,7 +248,7 @@ const fluffy = new Dog("Fluffy", "Poodle", 30);
 const spot = new Dog("Spot", "Chihuahua", 10);
 const dogs = [fido, fluffy, spot];
 for (let i = 0; i < dogs.length; i++) {
-    console.log(dogs[i]);
+    log(dogs[i]);
     dogs[i].bark();
 }
 
@@ -258,21 +260,21 @@ ShowDog.prototype = new Dog();
 ShowDog.prototype.constructor = ShowDog;
 ShowDog.prototype.league = "Webville";
 ShowDog.prototype.stack = function() {
-    console.log("Stack");
+    log("Stack");
 };
 ShowDog.prototype.bait = function() {
-    console.log("Bait");
+    log("Bait");
 };
 ShowDog.prototype.gait = function(kind) {
-    console.log(kind + "ing");
+    log(kind + "ing");
 };
 ShowDog.prototype.groom = function() {
-    console.log("Groom");
+    log("Groom");
 };
 
 const scotty = new ShowDog("Scotty", "Scottish Terrier", 15, "Cookie");
-console.log("scotty:", scotty);
-console.log("scotty.name:", scotty.name);
+log("scotty:", scotty);
+log("scotty.name:", scotty.name);
 
 
 const propScottyObj = {};
@@ -284,11 +286,11 @@ const propScottyObj_2 = Reflect.ownKeys(scotty).reduce((prev, cur) => {
     return prev;
 }, {});
 
-console.log("propScottyObj:", propScottyObj);
-console.log("propScottyObj_2:", propScottyObj_2);
+log("propScottyObj:", propScottyObj);
+log("propScottyObj_2:", propScottyObj_2);
 
-console.log("Object.getPrototypeOf(scotty):", Object.getPrototypeOf(scotty));
-console.log("Object.getPrototypeOf(fido):", Object.getPrototypeOf(fido));
+log("Object.getPrototypeOf(scotty):", Object.getPrototypeOf(scotty));
+log("Object.getPrototypeOf(fido):", Object.getPrototypeOf(fido));
 
 class User_2 {
 
@@ -303,7 +305,7 @@ class User_2 {
 
     set name(value) {
         if (value.length < 4) {
-            console.log("Имя слишком короткое.");
+            log("Имя слишком короткое.");
             return;
         }
         this._name = value;
@@ -312,18 +314,18 @@ class User_2 {
 }
 
 let user_3 = new User_2("Иван");
-console.log(user_3.name); // Иван
+log(user_3.name); // Иван
 
 user_3 = new User_2(""); // Имя слишком короткое.
 
 
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
-console.log("descriptor:", JSON.stringify(descriptor, null, 2));
+log("descriptor:", JSON.stringify(descriptor, null, 2));
 
 class User_3 {
 
     ['say' + 'Hi']() {
-        console.log("Привет");
+        log("Привет");
     }
 }
 
@@ -334,7 +336,7 @@ class User_4 {
     name = "Аноним";
 
     sayHi() {
-        console.log(`Привет, ${this.name}!`);
+        log(`Привет, ${this.name}!`);
     }
 }
 
@@ -361,7 +363,7 @@ function Clock({ template }) {
             .replace('m', mins)
             .replace('s', secs);
 
-        console.log(output);
+        log(output);
     }
 
     this.stop = function() {
@@ -402,7 +404,7 @@ class Clock_2 {
             .replace('m', mins)
             .replace('s', secs);
 
-        console.log(output);
+        log(output);
     }
 
     stop() {
@@ -427,11 +429,11 @@ class Animal {
     }
     run(speed) {
         this.speed = speed;
-        console.log(`${this.name} бежит со скоростью ${this.speed}.`);
+        log(`${this.name} бежит со скоростью ${this.speed}.`);
     }
     stop() {
         this.speed = 0;
-        console.log(`${this.name} стоит неподвижно.`);
+        log(`${this.name} стоит неподвижно.`);
     }
 }
 
@@ -444,7 +446,7 @@ class Rabbit extends Animal {
         this.earLength = earLength;
     }
     hide() {
-        console.log(`${this.name} прячется!`);
+        log(`${this.name} прячется!`);
     }
 
     stop() {
@@ -457,14 +459,14 @@ let rabbit = new Rabbit("Белый кролик", 10);
 
 rabbit.run(5); // Белый кролик бежит со скоростью 5.
 rabbit.stop(); // Белый кролик стоит. Белый кролик прячется!
-console.log(rabbit.name); // Белый кролик
-console.log(rabbit.earLength); // 10
+log(rabbit.name); // Белый кролик
+log(rabbit.earLength); // 10
 
 
 let animal_2 = {
     name: "Animal",
     eat() {
-        console.log(`${this.name} ест.`);
+        log(`${this.name} ест.`);
     }
 };
 
@@ -482,7 +484,7 @@ rabbit_2.eat(); // Кролик ест.
 let animal_3 = {
     name: "Животное",
     eat() {
-        console.log(`${this.name} ест.`);
+        log(`${this.name} ест.`);
     }
 };
 
@@ -527,7 +529,7 @@ let longEar = {
 let animal_4 = {
     name: "Животное",
     eat() {         // animal_4.eat.[[HomeObject]] == animal_4
-        console.log(`${this.name} ест.`);
+        log(`${this.name} ест.`);
     }
 };
 
@@ -570,7 +572,7 @@ class Rabbit_2 extends Animal_5 {
 }
 
 let rabbit_5 = new Rabbit_2("Белый кролик"); // Белый кролик
-console.log(rabbit_5.name);
+log(rabbit_5.name);
 
 
 class Clock_3 {
@@ -595,7 +597,7 @@ class Clock_3 {
             .replace('m', mins)
             .replace('s', secs);
 
-        console.log(output);
+        log(output);
     }
 
     stop() {
@@ -648,7 +650,7 @@ class Animal_6 {
 
     run(speed = 0) {
         this.speed += speed;
-        console.log(`${this.name} бежит со скоростью ${this.speed}.`);
+        log(`${this.name} бежит со скоростью ${this.speed}.`);
     }
 
     static compare(animalA, animalB) {
@@ -683,8 +685,8 @@ class Rabbit_4 extends Object {
 
 let rabbit_6 = new Rabbit_4("Кроль");
 
-console.log( rabbit_6.hasOwnProperty('name') ); // true
-console.log( Rabbit_4.getOwnPropertyNames({a: 1, b: 2}) ); // a,b
+log( rabbit_6.hasOwnProperty('name') ); // true
+log( Rabbit_4.getOwnPropertyNames({a: 1, b: 2}) ); // a,b
 
 
 class CoffeeMachine {
@@ -715,11 +717,11 @@ let coffeeMachine = new CoffeeMachine(100);
 // устанавливаем количество воды
 // coffeeMachine.waterAmount = -10; // Error: Отрицательное количество воды
 
-console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
+log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
 
 coffeeMachine.power = 25; // Error (no setter)
 
-console.log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
+log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
 
 // Here we used getter/setter syntax.
 //
@@ -757,8 +759,8 @@ coffeeMachine_2.setWaterAmount(100);
 // it’s up to you to decide.
 
 
-//console.log(coffeeMachine_2.#waterLimit = 1000); // Error
-//console.log(coffeeMachine_2.#checkWater()); // Error
+//log(coffeeMachine_2.#waterLimit = 1000); // Error
+//log(coffeeMachine_2.#checkWater()); // Error
 // On the language level, # is a special sign that the field is private.
 // We can’t access it from outside or from inheriting classes.
 
@@ -780,7 +782,7 @@ class CoffeeMachine_3 {
 let machine = new CoffeeMachine_3();
 
 machine.waterAmount = 100;
-// console.log(machine.#waterAmount); // Error
+// log(machine.#waterAmount); // Error
 
 // Extending built-in classes
 
@@ -796,30 +798,30 @@ class PowerArray extends Array {
 }
 
 let arr = new PowerArray(1, 2, 5, 10, 50);
-console.log(arr.isEmpty()); // false
+log(arr.isEmpty()); // false
 
 let filteredArr = arr.filter(item => item >= 10);
 
-console.log("arr.constructor:", arr.constructor);
-console.log(filteredArr); // 10, 50
-console.log("Array.isArray(filteredArr):", Array.isArray(filteredArr)); // true
-console.log("filteredArr.constructor:", filteredArr.constructor); // class PowerArray extends Array {
+log("arr.constructor:", arr.constructor);
+log(filteredArr); // 10, 50
+log("Array.isArray(filteredArr):", Array.isArray(filteredArr)); // true
+log("filteredArr.constructor:", filteredArr.constructor); // class PowerArray extends Array {
 // isEmpty() {
 //     return this.length === 0;
 // }
 // }
 
-console.log(filteredArr.isEmpty()); // false
-console.log("filteredArr.__proto__:", filteredArr.__proto__);
-console.log("filteredArr.__proto__ === Array.prototype:", filteredArr.__proto__ === Array.prototype);
-console.log("filteredArr.__proto__ === PowerArray.prototype:", filteredArr.__proto__ === PowerArray.prototype);
-console.log("filteredArr.__proto__.__proto__ === Array.prototype:", filteredArr.__proto__.__proto__ === Array.prototype);
-console.log("filteredArr.__proto__.__proto__.__proto__ === Object.prototype:",
+log(filteredArr.isEmpty()); // false
+log("filteredArr.__proto__:", filteredArr.__proto__);
+log("filteredArr.__proto__ === Array.prototype:", filteredArr.__proto__ === Array.prototype);
+log("filteredArr.__proto__ === PowerArray.prototype:", filteredArr.__proto__ === PowerArray.prototype);
+log("filteredArr.__proto__.__proto__ === Array.prototype:", filteredArr.__proto__.__proto__ === Array.prototype);
+log("filteredArr.__proto__.__proto__.__proto__ === Object.prototype:",
     filteredArr.__proto__.__proto__.__proto__ === Object.prototype);
 
-console.log("PowerArray.prototype.__proto__:", PowerArray.prototype.__proto__);
-console.log("PowerArray.prototype.__proto__ === Array.prototype:", PowerArray.prototype.__proto__ === Array.prototype);
-console.log("Object.getPrototypeOf(PowerArray.prototype) === Array.prototype:",
+log("PowerArray.prototype.__proto__:", PowerArray.prototype.__proto__);
+log("PowerArray.prototype.__proto__ === Array.prototype:", PowerArray.prototype.__proto__ === Array.prototype);
+log("Object.getPrototypeOf(PowerArray.prototype) === Array.prototype:",
     Object.getPrototypeOf(PowerArray.prototype) === Array.prototype);
 
 
@@ -835,13 +837,31 @@ class PowerArray_2 extends Array {
 }
 
 let arr_2 = new PowerArray_2(1, 2, 5, 10, 50);
-console.log("arr_2.isEmpty():", arr_2.isEmpty()); // false
+log("arr_2.isEmpty():", arr_2.isEmpty()); // false
 
 // filter creates new array using arr.constructor[Symbol.species] as constructor
 let filteredArr_2 = arr_2.filter(item => item >= 10);
 
 // filteredArr_2 не является PowerArray_2, это Array
-console.log("filteredArr_2.isEmpty():", filteredArr_2.isEmpty()); // Error: filteredArr_2.isEmpty is not a function
+//log("filteredArr_2.isEmpty():", filteredArr_2.isEmpty()); // Error: filteredArr_2.isEmpty is not a function
+
+log("Object.__proto__ === Function.prototype:", Object.__proto__ === Function.prototype);
+log("Function.prototype:", Function.prototype);
+log("Object.__proto__:", Object.__proto__);
 
 
+// Class checking: "instanceof"
+// Normally, instanceof examines the prototype chain for the check.
+// We can also set a custom logic in the static method Symbol.hasInstance.
+// setup instanceOf check that assumes that
+// anything with canEat property is an animal
+class Animal_7 {
+    static [Symbol.hasInstance](obj) {
+        if (obj.canEat) return true;
+    }
+}
+
+let obj = { canEat: true };
+
+alert(obj instanceof Animal_7); // true: Animal[Symbol.hasInstance](obj) is called
 

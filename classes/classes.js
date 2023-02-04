@@ -881,3 +881,11 @@ log("a[1]:", a[1], "// => 2") // => 2: regular array access syntax still works.
 log("Array.isArray(a):", Array.isArray(a), "// => true") // => true: subclass instance really is an array
 log("EZArray.isArray(a):", EZArray.isArray(a), "// => true") // => true: subclass inherits static methods, too!
 
+// EZArray inherits instance methods because EZArray.prototype
+// inherits from Array.prototype
+log("Array.prototype.isPrototypeOf(EZArray.prototype):", Array.prototype.isPrototypeOf(EZArray.prototype), "// => true") // => true
+// And EZArray inherits static methods and properties because
+// EZArray inherits from Array. This is a special feature of the
+// extends keyword and is not possible before ES6.
+log("Array.isPrototypeOf(EZArray):", Array.isPrototypeOf(EZArray), "// => true") // => true
+

@@ -871,13 +871,13 @@ log(obj instanceof Animal_7); // true: Animal[Symbol.hasInstance](obj) is called
     get last() { return this[this.length-1]; }
 }
 let a = new EZArray();
-a instanceof EZArray // => true: a is subclass instance
-a instanceof Array // => true: a is also a superclass instance.
-a.push(1,2,3,4); // a.length == 4; we can use inherited methods
-a.pop() // => 4: another inherited method
-a.first // => 1: first getter defined by subclass
-a.last // => 3: last getter defined by subclass
-a[1] // => 2: regular array access syntax still works.
-Array.isArray(a) // => true: subclass instance really is an array
-EZArray.isArray(a) // => true: subclass inherits static methods, too!
+log("a instanceof EZArray:", a instanceof EZArray, "// => true") // => true: a is subclass instance
+log("a instanceof Array:", a instanceof Array, "// => true") // => true: a is also a superclass instance.
+log("a.push(1,2,3,4):", a.push(1,2,3,4), "// a.length == 4"); // a.length == 4; we can use inherited methods
+log("a.pop():", a.pop(), "// => 4") // => 4: another inherited method
+log("a.first:", a.first, "// => 1") // => 1: first getter defined by subclass
+log("a.last:", a.last, "// => 3") // => 3: last getter defined by subclass
+log("a[1]:", a[1], "// => 2") // => 2: regular array access syntax still works.
+log("Array.isArray(a):", Array.isArray(a), "// => true") // => true: subclass instance really is an array
+log("EZArray.isArray(a):", EZArray.isArray(a), "// => true") // => true: subclass inherits static methods, too!
 

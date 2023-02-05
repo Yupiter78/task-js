@@ -1,3 +1,6 @@
+import {TypedMap} from "./typed_map.js";
+
+
 const log = console.log;
 
 //9.1 Classes and Prototypes
@@ -719,7 +722,7 @@ let coffeeMachine = new CoffeeMachine(100);
 
 log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
 
-coffeeMachine.power = 25; // Error (no setter)
+// coffeeMachine.power = 25; // Error (no setter)
 
 log(`Мощность: ${coffeeMachine.power}W`); // Мощность: 100W
 
@@ -888,4 +891,11 @@ log("Array.prototype.isPrototypeOf(EZArray.prototype):", Array.prototype.isProto
 // EZArray inherits from Array. This is a special feature of the
 // extends keyword and is not possible before ES6.
 log("Array.isPrototypeOf(EZArray):", Array.isPrototypeOf(EZArray), "// => true") // => true
+
+
+const typeMap = new TypedMap("number", "boolean", [[4, true], [2, false]]);
+log("typeMap", typeMap);
+
+typeMap.set("3", 4);
+log("typeMap", typeMap);
 

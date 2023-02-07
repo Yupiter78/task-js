@@ -1,4 +1,5 @@
 import {TypedMap} from "./typed_map.js";
+import {Histogram} from "./classHistogram.js";
 
 
 const log = console.log;
@@ -896,6 +897,21 @@ log("Array.isPrototypeOf(EZArray):", Array.isPrototypeOf(EZArray), "// => true")
 const typeMap = new TypedMap("number", "boolean", [[4, true], [2, false]]);
 log("typeMap", typeMap);
 
-typeMap.set("3", 4);
-log("typeMap", typeMap);
+// typeMap.set("3", 4);
+// log("typeMap", typeMap);
 
+const histogram = new Histogram();
+log("histogram:", histogram);
+
+histogram.add("firstProperty");
+log("histogram:", histogram);
+
+histogram.add("secondProperty");
+log("histogram:", histogram);
+
+histogram.add("thirdProperty");
+histogram.add("firstProperty");
+log("histogram:", histogram);
+
+log("histogram.keys():", histogram.keys());
+log("histogram.has('firstProperty'):", histogram.has("firstProperty"));

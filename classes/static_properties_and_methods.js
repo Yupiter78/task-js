@@ -1,3 +1,9 @@
+class Rabbit_2 extends Object {}
+
+console.log( "Rabbit_2.prototype.__proto__ === Object.prototype:",
+    Rabbit_2.prototype.__proto__ === Object.prototype, "// => true" ); // (1) true
+console.log( "Rabbit_2.__proto__ === Object:", Rabbit_2.__proto__ === Object, "// => true" ); // (2) true
+
 class Rabbit {}
 
 console.log( "Rabbit.prototype.__proto__ === Object.prototype:", Rabbit.prototype.__proto__ === Object.prototype,

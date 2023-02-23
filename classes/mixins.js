@@ -103,8 +103,9 @@ let eventMixin = {
 
 // Make a class
 class Menu {
+    #nameEvent = "select";
     choose(value) {
-        this.trigger("select", value);
+        this.trigger(this.#nameEvent, value);
     }
 }
 // Add the mixin with event-related methods

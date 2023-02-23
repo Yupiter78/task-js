@@ -201,3 +201,6 @@ class BitSet extends AbstractWritableSet {
 // Some pre-computed values used by the has(), insert() and remove() methods
 BitSet.bits = new Uint8Array([1, 2, 4, 8, 16, 32, 64, 128]);
 BitSet.masks = new Uint8Array([~1, ~2, ~4, ~8, ~16, ~32, ~64, ~128]);
+
+console.log("new Uint8Array():", new Uint8Array()); // new in ES2017
+

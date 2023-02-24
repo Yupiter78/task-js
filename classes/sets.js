@@ -145,8 +145,7 @@ class BitSet extends AbstractWritableSet {
         this.data = new Uint8Array(this.numBytes); // The bytes
     }
 // Internal method to check if a value is a legal member of this set
-    _valid(x) { return Number.isInteger(x) && x >= 0 && x <=
-        this.max; }
+    _valid(x) { return Number.isInteger(x) && x >= 0 && x <= this.max; }
 // Tests whether the specified bit of the specified byte of our
 // data array is set or not. Returns true or false.
     _has(byte, bit) { return (this.data[byte] &
@@ -166,6 +165,9 @@ class BitSet extends AbstractWritableSet {
         if (this._valid(x)) { // If the value is valid
             let byte = Math.floor(x / 8); // convert to byte and bit
             let bit = x % 8;
+            console.log("x:", x);
+            console.log("byte:", byte);
+            console.log("bit:", bit);
             if (!this._has(byte, bit)) { // If that bit is not set yet
                 this.data[byte] |= BitSet.bits[bit]; // then set it
                 this.n++; // and increment set size
@@ -203,4 +205,10 @@ BitSet.bits = new Uint8Array([1, 2, 4, 8, 16, 32, 64, 128]);
 BitSet.masks = new Uint8Array([~1, ~2, ~4, ~8, ~16, ~32, ~64, ~128]);
 
 console.log("new Uint8Array():", new Uint8Array()); // new in ES2017
+console.log("BitSet.bits:", BitSet.bits); //
+console.log("BitSet.masks:", BitSet.masks); //
+
+const bitSet = new BitSet(128);
+bitSet.insert(125);
+console.log("bitSet:", bitSet);
 

@@ -209,6 +209,7 @@ console.log("BitSet.bits:", BitSet.bits); //
 console.log("BitSet.masks:", BitSet.masks); //
 
 const bitSet = new BitSet(128);
-bitSet.insert(125);
+bitSet.insert(127);
+bitSet.insert(126);
 console.log("bitSet:", bitSet);
 

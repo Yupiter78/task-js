@@ -68,3 +68,13 @@ try {
 } catch (err) {
     log( "External catch got: " + err ); // caught it!
 }
+
+
+try {
+    log( 'try' );
+    if (confirm('Make an error?')) BAD_CODE();
+} catch (err) {
+    log( 'catch' );
+} finally {
+    log( 'finally' );
+}

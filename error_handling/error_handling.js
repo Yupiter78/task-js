@@ -103,3 +103,19 @@ try {
 log(result || "error occurred");
 
 log( `execution took ${diff}ms` );
+
+// In the example below, there’s a return in try.
+// In this case, finally is executed just before the control returns to the outer code.
+function func() {
+
+    try {
+        return 1;
+
+    } catch (err) {
+        /* ... */
+    } finally {
+        log( 'finally' );
+    }
+}
+
+log( func() ); // first works alert from finally, and then this one

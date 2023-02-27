@@ -119,3 +119,13 @@ function func() {
 }
 
 log( func() ); // first works alert from finally, and then this one
+
+window.onerror = function(message, url, line, col, error) {
+    log(`${message}\n В ${line}:${col} на ${url}`);
+};
+
+function readData_2() {
+    badFunc(); // Whoops, something went wrong!
+}
+
+readData_2();

@@ -118,14 +118,33 @@ function func() {
     }
 }
 
-log( func() ); // first works alert from finally, and then this one
+log( func() ); // first works log from finally, and then this one
 
 window.onerror = function(message, url, line, col, error) {
     log(`${message}\n В ${line}:${col} на ${url}`);
 };
 
 function readData_2() {
-    badFunc(); // Whoops, something went wrong!
+   // badFunc(); // Whoops, something went wrong!
 }
 
 readData_2();
+
+class ValidationError extends Error {
+    constructor(message) {
+        super(message); // (1)
+        this.name = "ValidationError"; // (2)
+    }
+}
+
+function test() {
+    throw new ValidationError("Whoops!");
+}
+
+try {
+    test();
+} catch(err) {
+    log(err.message); // Whoops!
+    log(err.name); // ValidationError
+    log(err.stack); // a list of nested calls with line numbers for each
+}

@@ -72,14 +72,14 @@ try {
 
 try {
     log( 'try' );
-    if (confirm('Make an error?')) BAD_CODE();
+   // if (confirm('Make an error?')) BAD_CODE();
 } catch (err) {
     log( 'catch' );
 } finally {
     log( 'finally' );
 }
 
-let num = +prompt("Enter a positive integer number?", 35)
+// let num = +prompt("Enter a positive integer number?", 35)
 
 let diff, result;
 
@@ -93,7 +93,7 @@ function fib(n) {
 let start = Date.now();
 
 try {
-    result = fib(num);
+    result = fib(num = 35);
 } catch (err) {
     result = 0;
 } finally {
@@ -133,7 +133,7 @@ readData_2();
 class ValidationError extends Error {
     constructor(message) {
         super(message); // (1)
-        this.name = "ValidationError"; // (2)
+        this.name = this.constructor.name; // (2)
     }
 }
 
@@ -147,4 +147,32 @@ try {
     log(err.message); // Whoops!
     log(err.name); // ValidationError
     log(err.stack); // a list of nested calls with line numbers for each
+}
+
+// Usage
+function readUser(json) {
+    let user = JSON.parse(json);
+
+    if (!user.age) {
+        throw new ValidationError("No field: age");
+    }
+    if (!user.name) {
+        throw new ValidationError("No field: name");
+    }
+
+    return user;
+}
+
+// Working example with try..catch
+
+try {
+    let user = readUser('{ "age": 25 }');
+} catch (err) {
+    if (err instanceof ValidationError) {
+        log("Invalid data: " + err.message); // Invalid data: No field: name
+    } else if (err instanceof SyntaxError) { // (*)
+        log("JSON Syntax Error: " + err.message);
+    } else {
+        throw err; // unknown error, rethrow it (**)
+    }
 }

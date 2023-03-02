@@ -130,13 +130,20 @@ function readData_2() {
 
 readData_2();
 
-class ValidationError extends Error {
+
+class MyError extends Error {
     constructor(message) {
-        super(message); // (1)
-        this.name = this.constructor.name; // (2)
+        super(message);
+        this.name = this.constructor.name;
     }
 }
 
+class ValidationError extends MyError {
+    constructor(message) {
+        super(message); // (1)
+    }
+}
+log("______:", new ValidationError("Whoops!"));
 function test() {
     throw new ValidationError("Whoops!");
 }
@@ -145,7 +152,7 @@ try {
     test();
 } catch(err) {
     log(err.message); // Whoops!
-    log(err.name); // ValidationError
+    log("err.name:", err.name, "//=> ValidationError"); // ValidationError
     log(err.stack); // a list of nested calls with line numbers for each
 }
 
@@ -174,5 +181,44 @@ try {
         log("JSON Syntax Error: " + err.message);
     } else {
         throw err; // unknown error, rethrow it (**)
+    }
+}
+
+class PropertyRequiredError extends ValidationError {
+    constructor(property) {
+        super("No property: " + property);
+        this.property = property;
+    }
+}
+
+log("+++++++:", new PropertyRequiredError("age"));
+
+// Usage
+function readUser_2(json) {
+    let user = JSON.parse(json);
+
+    if (!user.age) {
+        throw new PropertyRequiredError("age");
+    }
+    if (!user.name) {
+        throw new PropertyRequiredError("name");
+    }
+
+    return user;
+}
+
+// Working example with try..catch
+
+try {
+    let user = readUser_2('{ "age": 25 }');
+} catch (err) {
+    if (err instanceof ValidationError) {
+        log("Invalid data: " + err.message); // Invalid data: No property: name
+        log("err.name:", err.name, "//=> PropertyRequiredError"); // PropertyRequiredError
+        log(err.property); // name
+    } else if (err instanceof SyntaxError) {
+        log("JSON Syntax Error: " + err.message);
+    } else {
+        throw err; // unknown error, rethrow it
     }
 }

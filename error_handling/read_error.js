@@ -65,3 +65,18 @@ try {
         throw e;
     }
 }
+
+class FormatError extends SyntaxError {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
+}
+
+const error = new FormatError("formatting error");
+
+log("error.name:", error.name);
+log("error.message:", error.message);
+log("error.stack:", error.stack);
+
+log("error instanceof SyntaxError:", error instanceof SyntaxError);

@@ -1,3 +1,5 @@
+const log = console.log;
+
 function loadScript(src, callback) {
     let script = document.createElement("script");
     script.src = src;
@@ -19,3 +21,12 @@ function loadScriptPromise(src) {
         document.head.append(script);
     })
 }
+
+let promise = loadScriptPromise("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js");
+
+promise.then(
+    script => log(`${script.src} is loaded!`),
+    error => log(`Error: ${error.message}`)
+);
+
+promise.then(script => log('Another handler...'));

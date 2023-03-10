@@ -30,3 +30,17 @@ promise.then(
 );
 
 promise.then(script => log('Another handler...'));
+
+
+function delay(ms) {
+        return new Promise(function (resolve) {
+            setTimeout(resolve, ms);
+        });
+}
+
+function delay_2(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+delay(3000).then(() => log('runs after 3 seconds'));
+delay_2(4000).then(() => log('runs after 4 seconds'));

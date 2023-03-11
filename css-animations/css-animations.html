@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS-animations</title>
+</head>
+<body>
+<h1>CSS-animations</h1>
+<button id="color">Click me</button>
+
+<style>
+	#color {
+		transition-property: background-color;
+		transition-duration: 3s;
+	}
+</style>
+
+<script>
+	color.onclick = function() {
+		this.style.backgroundColor = 'red';
+	};
+</script>
+<script src="css-animations.js"></script>
+</body>
+</html>

@@ -2,24 +2,24 @@ const log = console.log;
 
 const color = document.getElementById("color");
 log("color:", color);
-log("window.getComputedStyle:", window.getComputedStyle(color));
-log("color.style:", color.style);
-log("color.style.backgroundColor:", color.style.backgroundColor);
-log("color.style.fontSize:", color.style.font);
+
+const computedStyle = getComputedStyle(color);
+log("computedStyle.fontSize:", computedStyle.fontSize);
+log("computedStyle.backgroundColor:", computedStyle.backgroundColor);
 
 changeColor = () => {
-    if (color.style.backgroundColor === "blue" || color.style.backgroundColor === "") {
+    if (computedStyle.backgroundColor === "rgb(0, 0, 255)" || computedStyle.backgroundColor === "rgb(240, 240, 240)") {
         return "red";
-    } else if (color.style.backgroundColor === "red") {
+    } else if (computedStyle.backgroundColor === "rgb(255, 0, 0)") {
         return "blue";
     }
 };
+changeSize = () => computedStyle.fontSize === "36px" ? "13.3333px" : "36px";
 
 color.onclick = function() {
     log("CLICK");
-    log("color.style.backgroundColor:", color.style.backgroundColor);
-    log("color.style.fontSize:", color.style.fontSize);
+    log("computedStyle.backgroundColor:", computedStyle.backgroundColor);
+    log("computedStyle.fontSize:", computedStyle.fontSize);
     this.style.backgroundColor = changeColor();
-    this.style.fontSize = "36px";
-    log("changeColor():", changeColor());
+    this.style.fontSize = changeSize();
 };

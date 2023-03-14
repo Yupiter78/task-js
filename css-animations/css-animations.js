@@ -14,7 +14,7 @@ changeColor = () => {
         return "blue";
     }
 };
-changeSize = () => computedStyle.fontSize === "36px" ? "13.3333px" : "36px";
+changeSize = () => computedStyle.fontSize === "70px" ? "13.3333px" : "70px";
 
 color.onclick = function() {
     log("CLICK");

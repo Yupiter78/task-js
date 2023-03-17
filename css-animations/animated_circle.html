@@ -6,33 +6,22 @@
 	<style>
 		.circle {
 			transition-property: width, height;
-			transition-duration: 2s;
+			transition-duration: 4s;
 			position: fixed;
 			transform: translateX(-50%) translateY(-50%);
 			background-color: red;
 			border-radius: 50%;
+			left: 350px;
+			top: 350px;
+			width: 20px;
+			height: 20px;
 		}
 	</style>
 </head>
 <body>
 <h1>Animated circle</h1>
-<button onclick="showCircle(150, 150, 100)">showCircle(150, 150, 100)</button>
+<div class="circle"></div>
 
-<script>
-	function showCircle(cx, cy, radius) {
-		let div = document.createElement('div');
-		div.style.width = 0;
-		div.style.height = 0;
-		div.style.left = cx + 'px';
-		div.style.top = cy + 'px';
-		div.className = 'circle';
-		document.body.append(div);
-		
-		setTimeout(() => {
-			div.style.width = radius * 2 + 'px';
-			div.style.height = radius * 2 + 'px';
-		}, 0);
-	}
-</script>
+<script src="animated_circle.js"></script>
 </body>
 </html>

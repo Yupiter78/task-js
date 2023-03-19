@@ -1,0 +1,19 @@
+#digit {
+    width: .6em;
+    overflow: hidden;
+    font: 250px monospace;
+    cursor: pointer;
+    margin: auto;
+
+}
+
+#stripe {
+    display: inline-block;
+}
+
+#stripe.animate {
+    transform: translate(-90%);
+    transition-property: transform;
+    transition-duration: 9s;
+    transition-timing-function: linear;
+}

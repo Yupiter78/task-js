@@ -2,38 +2,39 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="transition.css">
+	<link rel="stylesheet" href="transitionend.css">
 	<title>Transitionend</title>
 </head>
 <body>
-<img src="https://js.cx/clipart/boat.png" id="boat" alt="boat">
-
-<script>
-	const boat = document.querySelector("#boat");
-	boat.onclick = function() {
-		
-		this.onclick = null; // only the first click should start the animation
-		
-		let times = 1;
-		
-		function go() {
-			if (times % 2) {
-				boat.classList.remove('back');
-				boat.style.marginLeft = 100 * times + 200 + 'px';
-			} else {
-				boat.classList.add('back');
-				boat.style.marginLeft = 100 * times - 200 + 'px';
+	<img src="https://js.cx/clipart/boat.png" id="boat" alt="boat"/>
+	
+	<script>
+		const boat = document.querySelector("#boat");
+		console.log("boat:", boat);
+		boat.onclick = function() {
+			
+			this.onclick = null; // only the first click should start the animation
+			
+			let times = 1;
+			
+			function go() {
+				if (times % 2) {
+					boat.classList.remove('back');
+					boat.style.marginLeft = 100 * times + 200 + 'px';
+				} else {
+					boat.classList.add('back');
+					boat.style.marginLeft = 100 * times - 200 + 'px';
+				}
+				
 			}
 			
-		}
-		
-		go();
-		
-		boat.addEventListener('transitionend', function() {
-			times++;
 			go();
-		});
-	}
-</script>
+			
+			boat.addEventListener('transitionend', function() {
+				times++;
+				go();
+			});
+		}
+	</script>
 </body>
 </html>

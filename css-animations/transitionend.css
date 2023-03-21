@@ -7,5 +7,5 @@
 /* flipping the picture with CSS */
 .back {
     transform: scaleX(-1);
-    filter: revert;
+    filter: fliph();
 }

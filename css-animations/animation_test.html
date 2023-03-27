@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Animation test</title>
+	<style>
+		.circle {
+			transition-property: width, height;
+			transition-duration: 2s;
+			position: fixed;
+			transform: translateX(-50%) translateY(-50%);
+			background-color: red;
+			border-radius: 50%;
+			
+			width: 0;
+			height: 0;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<button id="button">showCircle(150, 150, 100)</button>
+	<div class="circle"></div>
+	<script src="animation_test.js"></script>
+</body>
+</html>

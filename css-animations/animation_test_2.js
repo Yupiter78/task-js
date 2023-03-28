@@ -1,12 +1,11 @@
 function showCircle(cx, cy, radius) {
     const div = document.createElement("div");
-    div.classList.add("circle");
     div.style.width = "0px";
     div.style.height = "0px";
-    document.body.append(div);
-
     div.style.left = cx + "px";
     div.style.top = cy + "px";
+    div.className = "circle";
+    document.body.append(div);
 
     setTimeout(() => {
         div.style.width = radius * 2 + "px";

@@ -10,8 +10,13 @@ function showCircle(cx, cy, radius, callback) {
     setTimeout(() => {
         div.style.width = radius * 2 + "px";
         div.style.height = radius * 2 + "px";
+
+
+        div.addEventListener("transitionend", function handler() {
+                div.removeEventListener("transitionend", handler);
+                callback(div);
+        });
     }, 0);
-    setTimeout(() => callback(div), 2000);
 
 }
 

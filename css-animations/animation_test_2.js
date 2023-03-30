@@ -1,3 +1,9 @@
+function go() {
+    showCircle(150, 150, 100, div => {
+        div.classList.add('message-ball');
+        div.append("Hello, world!");
+    });
+}
 function showCircle(cx, cy, radius, callback) {
     const div = document.createElement("div");
     div.style.width = "0px";
@@ -23,7 +29,4 @@ function showCircle(cx, cy, radius, callback) {
 const button = document.createElement("button");
 button.textContent = "showCircle(150, 150, 100)"
 document.body.append(button);
-button.onclick = () => showCircle(150, 150, 100, div => {
-    div.classList.add('message-ball');
-    div.append("Hello, world!");
-});
+button.onclick = () => go();

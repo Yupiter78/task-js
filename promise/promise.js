@@ -45,6 +45,17 @@ function delay_2(ms) {
 delay(3000).then(() => log('runs after 3 seconds'));
 delay_2(4000).then(() => log('runs after 4 seconds'));
 
+class NetworkError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
+}
+
+const displayUserProfile = (profile) => log(profile);
+const displayLoggedOutProfilePage = () => log("Error");
+const displayErrorMessage = (message) => log(message);
+
 fetch("/api/user/profile") // Start the HTTP request
     .then(response => { // Call this when status and headers are ready
         if (!response.ok) { // If we got a 404 Not Found or similar error
@@ -56,7 +67,7 @@ fetch("/api/user/profile") // Start the HTTP request
         if (type !== "application/json") {
             throw new TypeError(`Expected JSON, got ${type}`);
         }
-// If we get here, then we got a 2xx status and a JSON content-type
+// If we get here, then we got a 2xx status and a JSON content-type,
 // so we can confidently return a Promise for the response
 // body as a JSON object.
         return response.json();

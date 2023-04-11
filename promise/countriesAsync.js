@@ -1,4 +1,4 @@
-async function getCountries() {
+(async () => {
     try {
         const response = await fetch('https://restcountries.com/v3.1/all');
         ((countries) => {
@@ -17,5 +17,4 @@ async function getCountries() {
     } finally {
         console.log("finally")
     }
-}
-getCountries();
+})();

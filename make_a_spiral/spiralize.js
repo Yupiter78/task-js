@@ -55,9 +55,9 @@ function makeASpiral(n) {
 }
 
 
-console.log(makeASpiral(10));
-
 console.log(makeASpiral(5)); // [[1,1,1,1,1],[0,0,0,0,1],[1,1,1,0,1],[1,0,0,0,1],[1,1,1,1,1]]
+
+console.log(makeASpiral(10));
 
 /*
  [

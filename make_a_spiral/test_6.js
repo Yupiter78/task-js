@@ -4,15 +4,13 @@ function makeASpiral(n) {
     let rowStart = 0,
         rowEnd = n - 1,
         colStart = 0,
-        colEnd = n - 1,
-        count = 1;
+        colEnd = n - 1;
 
     while (rowStart <= rowEnd && colStart <= colEnd) {
 
         // top row
         for (let i = colStart; i <= colEnd; i++) {
                 matrix[rowStart][i] = 1;
-                count++;
         }
         rowStart = rowStart + 1;
 
@@ -21,7 +19,6 @@ function makeASpiral(n) {
         for (let i = rowStart; i <= rowEnd; i++) {
 
                 matrix[i][colEnd] = 1;
-                count++;
         }
         colEnd = colEnd - 1;
         if (rowStart === rowEnd) break;
@@ -29,7 +26,6 @@ function makeASpiral(n) {
         // bottom row
         for (let i = colEnd; i >= colStart; i--) {
                 matrix[rowEnd][i] = 1;
-                count++;
         }
         rowEnd = rowEnd - 1;
         if (colStart === colEnd) break;

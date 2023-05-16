@@ -1,9 +1,7 @@
 // This code contains a function sleep that needs to be implemented. The function takes one argument - the number of milliseconds to delay execution of an action. Inside the function,
 // you can use the setTimeout method to delay execution for a specified number of milliseconds.
 const sleep = ms => {
-    return setTimeout(new Promise((resolve, reject) => {
-
-    }), ms)
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // Example usage of the sleep function to perform an action with a 5-second delay:

@@ -7,6 +7,13 @@ function getPromise(sec) {
 
 getPromise(5).then((time) => console.log(`Executed after ${time} seconds!`));
 
+function delay(time) {
+    return new Promise(resolve => setTimeout(() =>
+        resolve(`Executed after ${time} seconds!`), time * 1000));
+}
+
+delay(7).then((message) => console.log(message));
+
 
 function wait(seconds) {
     return new Promise(resolve => setTimeout(resolve, seconds * 1000));

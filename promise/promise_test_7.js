@@ -29,3 +29,15 @@ getData('https://jsonplaceholder.typicode.com/todos/1')
     .catch(error => {
         console.error(error);
     });
+
+
+function fetchData(url) {
+    return fetch(url)
+        .then(response => response.json())
+        .catch(error => console.log(error));
+}
+
+// usage example
+fetchData("https://jsonplaceholder.typicode.com/posts/1")
+    .then(data => console.log(data))
+    .catch(error => console.error(error));

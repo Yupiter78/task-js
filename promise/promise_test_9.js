@@ -16,6 +16,19 @@ function getRequest(url) {
 
 const url = "https://jsonplaceholder.typicode.com/todos/1";
 
+/*
 getRequest(url)
-    .then(data => console.log("Data uploaded successfully", data))
-    .catch(error => console.log("An error has occurred"));
+    .then(data => console.log("Data uploaded successfully:", data))
+    .catch(error => console.log("An error has occurred:", error));*/
+
+
+async function main() {
+    try {
+        const data = await getRequest(url);
+        console.log("Data uploaded successfully:", data);
+    } catch (error) {
+        console.log("An error has occurred:", error);
+    }
+}
+
+main();

@@ -15,6 +15,7 @@ function getRequest(url) {
 }
 
 const url = "https://jsonplaceholder.typicode.com/todos/1";
+const url2 = "https://jsonplaceholder.typicode.com/todos/2";
 
 /*
 getRequest(url)
@@ -22,13 +23,18 @@ getRequest(url)
     .catch(error => console.log("An error has occurred:", error));*/
 
 
-async function main() {
+(async function () {
     try {
         const data = await getRequest(url);
         console.log("Data uploaded successfully:", data);
+        if (data) {
+            const newData = await getRequest(url2);
+            console.log("newData uploaded successfully:", newData);
+        }
+
+
     } catch (error) {
         console.log("An error has occurred:", error);
     }
-}
+})();
 
-main();

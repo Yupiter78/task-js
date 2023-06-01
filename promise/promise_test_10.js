@@ -21,7 +21,7 @@ const urls = [
     'https://api.github.com/users/jeresig'
 ];
 
-const getResponses = async (urls) => {
+/*const getResponses = async (urls) => {
     try {
         const responses = await Promise.all(urls.map(url => fetch(url)));
         return  await Promise.all(responses.map(async (response) => {
@@ -35,9 +35,24 @@ const getResponses = async (urls) => {
 
 getResponses(urls)
     .then(responseData => console.log({ responseData }))
-    .catch(error => console.log(error));
+    .catch(error => console.log(error));*/
 
 
+const getResponses = async (urls) => {
+    const responses = [];
+    for (const url of urls) {
+        const response = await fetch(url);
+        if (!response.ok) { // Используем свойство ok
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+        const { name, location } = await response.json();
+        responses.push({ name, location });
+    }
+    return responses;
+};
 
+getResponses(urls)
+    .then(data => console.log({ data }))
+    .catch(error => console.error({ error }));
 
 

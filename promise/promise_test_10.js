@@ -38,7 +38,7 @@ getResponses(urls)
     .catch(error => console.log(error));*/
 
 
-const getResponses = async (urls) => {
+/*const getResponses = async (urls) => {
     const responses = [];
     for (const url of urls) {
         const response = await fetch(url);
@@ -53,6 +53,17 @@ const getResponses = async (urls) => {
 
 getResponses(urls)
     .then(data => console.log({ data }))
-    .catch(error => console.error({ error }));
+    .catch(error => console.error({ error }));*/
+
+import axios from 'axios';
+
+const getResponses = async (urls) => {
+    const responses = await Promise.all(urls.map(url => axios.get(url)));
+
+    return responses.map(({ data }) => {
+        const { name, location } = data;
+        return { name, location };
+    });
+};
 
 

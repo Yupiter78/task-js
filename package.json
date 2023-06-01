@@ -1,6 +1,22 @@
 {
   "name": "task_js",
   "version": "1.0.0",
+  "description": "",
+  "main": "js_animation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yupiter78/task-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yupiter78/task-js/issues"
+  },
+  "homepage": "https://github.com/Yupiter78/task-js#readme",
   "dependencies": {
     "axios": "^1.4.0"
   }

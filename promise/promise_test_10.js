@@ -1,25 +1,23 @@
-/*async function getDataSequentially(urls) {
-    const results = [];
-    for (const url of urls) {
-        const response = await fetch(url);
-        const data = await response.json();
-        results.push(data);
-    }
-    return results;
-}
-
-// usage example
-getDataSequentially([
-    "https://jsonplaceholder.typicode.com/posts/1",
-    "https://jsonplaceholder.typicode.com/posts/2",
-    "https://jsonplaceholder.typicode.com/posts/3"
-]).then(results => console.log(results));*/
+const axios = window.axios;
 
 const urls = [
     'https://api.github.com/users/iliakan',
     'https://api.github.com/users/remy',
     'https://api.github.com/users/jeresig'
 ];
+
+const getResponses = async (urls) => {
+    const responses = await Promise.all(urls.map(url => axios.get(url)));
+
+    return responses.map(({ data }) => {
+        const { name, location } = data;
+        return { name, location };
+    });
+};
+
+getResponses(urls)
+    .then(data => console.log({ data }))
+    .catch(error => console.error({ error }));
 
 /*const getResponses = async (urls) => {
     try {
@@ -55,15 +53,20 @@ getResponses(urls)
     .then(data => console.log({ data }))
     .catch(error => console.error({ error }));*/
 
-import axios from 'axios';
+/*async function getDataSequentially(urls) {
+    const results = [];
+    for (const url of urls) {
+        const response = await fetch(url);
+        const data = await response.json();
+        results.push(data);
+    }
+    return results;
+}
 
-const getResponses = async (urls) => {
-    const responses = await Promise.all(urls.map(url => axios.get(url)));
-
-    return responses.map(({ data }) => {
-        const { name, location } = data;
-        return { name, location };
-    });
-};
-
+// usage example
+getDataSequentially([
+    "https://jsonplaceholder.typicode.com/posts/1",
+    "https://jsonplaceholder.typicode.com/posts/2",
+    "https://jsonplaceholder.typicode.com/posts/3"
+]).then(results => console.log(results));*/
 

@@ -1,4 +1,4 @@
-const axios = window.axios;
+import axios from "axios";
 
 const urls = [
     'https://api.github.com/users/iliakan',

@@ -67,3 +67,17 @@ fetchDataWithCache("https://jsonplaceholder.typicode.com/posts/1")
     .then(data => console.log(data))
     .catch(error => console.error(error));
 
+
+const fetchData = async (url) => {
+    const data = localStorage.getItem(url);
+    if (data) return JSON.parse(data);
+    // const response = await fetch(url);
+    const result = await (await fetch(url)).json();
+    localStorage.setItem(url, JSON.stringify(result));
+    return result;
+}
+
+fetchData("https://jsonplaceholder.typicode.com/posts/1")
+    .then(data => console.log("data:", data))
+    .catch(error => console.log(error));
+

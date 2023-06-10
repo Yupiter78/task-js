@@ -57,6 +57,6 @@ const multipleRequest = async (fn, limit) => {
 }
 
 // usage example
-multipleRequest(() => fetch(`https://jsonplaceholder.tpicode.com/posts`), 3)
+multipleRequest(() => fetch(`https://jsonplaceholder.typicode.com/posts`), 3)
     .then(data => console.log(data))
     .catch(error => console.error(error.message));

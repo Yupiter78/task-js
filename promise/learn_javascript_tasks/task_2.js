@@ -81,3 +81,22 @@ async function demoGithubUser() {
 }
 
 demoGithubUser();
+
+async function demoGithubUser_2() {
+    let user = null;
+    while (true) {
+        let name = prompt("Enter a name?", "iliakan");
+        try {
+            user = await loadJson(`https://api.github.com/users/${name}`);
+            break;
+        } catch (err) {
+            if (err instanceof HttpError && err.response.status === 404) {
+                console.log("No such user, please reenter.");
+            } else {
+                throw err;
+            }
+        }
+    }
+    console.log(`Full name:${user.name}.`);
+    return user;
+}

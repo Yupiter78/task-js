@@ -97,6 +97,8 @@ async function demoGithubUser_2() {
             }
         }
     }
-    console.log(`Full name:${user.name}.`);
+    console.log(`Full name: ${user.name}.`);
     return user;
 }
+
+demoGithubUser_2();

@@ -21,3 +21,5 @@ const range =  {
 for (let num of range) {
     console.log(num);
 }
+
+console.log([...range]);

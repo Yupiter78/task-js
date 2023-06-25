@@ -23,13 +23,11 @@ export class TypedMap extends Map {
     set(key, value) {
 // Throw an error if the key or value are of the wrong type
         if (this.keyType && typeof key !== this.keyType) {
-            throw new TypeError(`${key} is not of type
-${this.keyType}`);
+            throw new TypeError(`${key} is not of type ${this.keyType}`);
         }
         if (this.valueType && typeof value !== this.valueType)
         {
-            throw new TypeError(`${value} is not of type
-${this.valueType}`);
+            throw new TypeError(`${value} is not of type ${this.valueType}`);
         }
 // If the types are correct, we invoke the superclass's version of
 // the set() method, to actually add the entry to the map. And we

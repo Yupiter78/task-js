@@ -26,6 +26,11 @@ console.log(user.name); // John
 console.log(user.surname); // Smith
 console.log("user:", user);
 console.log("admin:", admin);
+console.log("Object.keys:", Object.keys(admin));
+
+for (let prop in admin) {
+    console.log("Admin_prop:", prop);
+}
 
 
 // методы animal
